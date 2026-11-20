@@ -84,8 +84,9 @@ Chaque dossier contient les slides `ixeam-1.jpg … ixeam-N.jpg` (1080×1350), `
 
 ## Programmation automatique (Metricool)
 
-Le compte Metricool (brand id 8143049) n'a encore **aucun réseau connecté**. Pour programmer automatiquement à 16:30, il faut d'abord y connecter Instagram :
-https://app.metricool.com/brands/connections?blogId=8143049
+✅ Programmé dans Metricool (brand id 8143049) sur Instagram @ixeam_01 : publication automatique à 16:30 (Africa/Algiers), avec caption et premier commentaire.
+Planning : https://app.metricool.com/planner/calendar?blogId=8143049
+À faire à la main : la story (`story.jpg` + sondage du `caption.md`) et les réponses DM aux mots-clés.
 
 ## Posts du 21 au 23 novembre (programmés aussi à 16:30)
 

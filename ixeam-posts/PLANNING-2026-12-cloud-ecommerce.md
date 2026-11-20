@@ -109,4 +109,6 @@ Schedule (02:00) → Shopify: Get all products + Get all orders → Convert to F
 
 ## Programmation automatique (Metricool)
 
-Toujours aucun réseau connecté sur Metricool (brand id 8143049). Connecter Instagram : https://app.metricool.com/brands/connections?blogId=8143049
+✅ Semaine 1 (1 → 7 décembre) programmée dans Metricool sur Instagram @ixeam_01 : publication automatique à 16:30 (Africa/Algiers), avec caption et premier commentaire.
+Planning : https://app.metricool.com/planner/calendar?blogId=8143049
+À faire à la main : la story (`story.jpg` + sondage du `caption.md`) et les réponses DM aux mots-clés.
