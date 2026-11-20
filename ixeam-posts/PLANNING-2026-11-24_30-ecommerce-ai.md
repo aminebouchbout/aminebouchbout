@@ -86,3 +86,32 @@ Chaque dossier contient les slides `ixeam-1.jpg … ixeam-N.jpg` (1080×1350), `
 
 Le compte Metricool (brand id 8143049) n'a encore **aucun réseau connecté**. Pour programmer automatiquement à 16:30, il faut d'abord y connecter Instagram :
 https://app.metricool.com/brands/connections?blogId=8143049
+
+## Posts du 21 au 23 novembre (programmés aussi à 16:30)
+
+| Date | Dossier | Sujet | Mot-clé DM |
+|---|---|---|---|
+| Sam 21/11 | `2026-11-21-photo-telephone` | Photographier ses produits au téléphone | PHOTO |
+| Dim 22/11 | `2026-11-22-faible-vs-fort` | Vidéo faible vs vidéo qui vend | VIDEO |
+| Lun 23/11 | `2026-11-23-services-ixeam` | Les services IXEAM (pub de A à Z) | (message privé) |
+
+### PHOTO
+```
+مرحبا 👋 الـ Checklist تاع التصوير بالتيليفون:
+□ ضوء النهار قرب الشباك (بلا Flash مباشر)
+□ خلفية بسيطة ونظيفة بلون محايد
+□ التيليفون ثابت (Trépied ولا حاجة تسندو)
+□ عدسة نظيفة
+□ 3 زوايا على الأقل: قدّام، فوق، قريب
+□ 4 لقطات: المنتج كامل، تفصيل قريب، في الاستعمال، الحجم
+تحب نصنعولك الفيديو؟ ابعثلنا 🙌
+```
+
+### VIDEO
+```
+مرحبا 👋 الهيكل الجاهز للفيديو اللي يبيع:
+1. البداية (Hook): ابدا بالمشكل ولا النتيجة — «تعبت من …؟»
+2. الوسط: المنتج في الاستعمال + دليل (رأي ولا تجربة)
+3. النهاية: CTA واضح + العرض — «اطلب درك من الرابط»
+وقبل ما تنشر: يبدا بمشكل؟ فكرة وحدة؟ المنتج يبان يخدم؟ CTA واضح؟
+```
