@@ -233,7 +233,7 @@ const beats=[['HOOK','لباس واحد يمشي معاك للرياضة ولل�
   beats.forEach((b,i)=>{
     const d=document.createElement('div');d.className='pp glass';d.dataset.s=(31.6+i*0.95).toFixed(2);d.dataset.d='0.5';d.dataset.dx='60';
     d.style.cssText='left:1010px;top:'+(246+i*104)+'px;width:810px;height:92px;display:flex;align-items:center;gap:18px;padding:0 22px;direction:rtl';
-    d.innerHTML='<span class="chip '+b[2]+' mono" style="font-size:21px;min-width:158px;text-align:center">'+b[0]+'</span><span style="font-size:30px;font-weight:700;flex:1;text-align:right">'+b[1]+'</span>';
+    d.innerHTML='<span class="chip '+b[2]+' mono" style="font-size:21px;min-width:158px;text-align:center">'+b[0]+'</span><span style="font-size:26px;font-weight:700;flex:1;text-align:right">'+b[1]+'</span>';
     host.appendChild(d);
   });
 })();
@@ -268,7 +268,7 @@ const cellEls=[];
 /* S6 ad sequence */
 const adSeq=[
   {a:48.6,b:50.2,src:'assets/p3.jpg',fb:null,txt:'لباس واحد... كل الخرجات'},
-  {a:50.2,b:51.6,src:'assets/p4.jpg',fb:null,txt:'Séchage rapide · Protection UV'},
+  {a:50.2,b:51.6,src:'assets/p4.jpg',fb:null,txt:'Séchage rapide\nProtection UV'},
   {a:51.6,b:53.0,src:'assets/p6.png',fb:'assets/p6.jpg',txt:'نوّع الألوان'},
   {a:53.0,b:54.2,src:'assets/p2.jpg',fb:null,txt:'Ensemble 2 قطع'}
 ];
@@ -349,7 +349,7 @@ window.render=function(t){
       const k=clamp((t-s.a)/(s.b-s.a));s.inner.style.transform='scale('+(1+.10*k)+')';
     });
     let tx='';adSeq.forEach(s=>{if(t>=s.a&&t<s.b){tx=s.txt;}});
-    const at=$('adtxt');at.innerHTML=tx?bd(tx):'';
+    const at=$('adtxt');at.innerHTML=tx?tx.split('\n').map(bd).join('<br>'):'';
     const cs=adSeq.find(s=>t>=s.a&&t<s.b);
     at.style.opacity=cs?Math.min(ease(clamp((t-cs.a)/0.3)),1):0;
     $('adprice').style.opacity=ease(clamp((t-52.2)/0.4));
