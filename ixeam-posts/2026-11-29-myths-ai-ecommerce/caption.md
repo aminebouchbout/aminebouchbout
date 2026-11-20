@@ -1,7 +1,7 @@
 # 2026-11-29-myths-ai-ecommerce
 
 Publication : 2026-11-29 à 16:30 (heure d'Algérie)
-Format : carrousel 5 slides (ixeam-1 → ixeam-N) + story
+Format : carrousel 5 slides (ixeam-1 → ixeam-N) + story — slides avec captures réelles de workflows n8n
 
 ## Caption (copier-coller)
 

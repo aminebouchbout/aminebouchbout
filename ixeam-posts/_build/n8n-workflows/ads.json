@@ -1,0 +1,151 @@
+{
+  "name": "Competitor ad analysis (AI)",
+  "nodes": [
+    {
+      "id": "n0021-0000-4000-8000-000000000000",
+      "name": "Paste a competitor ad",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "formTitle": "تحليل إعلان منافس",
+        "formDescription": "حط نص الإعلان والعرض، والذكاء الاصطناعي يحللو",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "نص الإعلان",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "العرض (السومة، التوصيل…)",
+              "fieldType": "text"
+            },
+            {
+              "fieldLabel": "المنتج تاعك",
+              "fieldType": "text",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "customCss": "* { direction: rtl; text-align: right; font-family: 'Cairo', sans-serif !important; letter-spacing: 0 !important; }\n.n8n-link, .test-notice, button { text-align: center; }"
+        }
+      }
+    },
+    {
+      "id": "n0022-0000-4000-8000-000000000000",
+      "name": "Analyse the ad (AI)",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        280,
+        0
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "=راك خبير Performance Marketing.\nهذا Ad تاع منافس: {{ $json['نص الإعلان'] }}\nالـ Offer: {{ $json['العرض (السومة، التوصيل…)'] }}\nحللي:\n1. الـ Hook: شنو يوقف الكليان؟\n2. الـ Angle: أي مشكل ولا رغبة يستهدف؟\n3. الـ Offer والـ CTA\n4. نقاط الضعف\nمن بعد اقترح 5 Hooks جداد للمنتج تاعي: {{ $json['المنتج تاعك'] }}\nالسوق: الجزائر، الدفع عند الاستلام. جاوبني في جدول.\nما تكوبيش الـ Ad."
+      }
+    },
+    {
+      "id": "n0023-0000-4000-8000-000000000000",
+      "name": "Claude (Chat Model)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        280,
+        220
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-4-5"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "id": "n0024-0000-4000-8000-000000000000",
+      "name": "Save insights (Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        580,
+        0
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "ads"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Paste a competitor ad": {
+      "main": [
+        [
+          {
+            "node": "Analyse the ad (AI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude (Chat Model)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Analyse the ad (AI)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse the ad (AI)": {
+      "main": [
+        [
+          {
+            "node": "Save insights (Sheets)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

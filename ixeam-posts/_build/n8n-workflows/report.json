@@ -1,0 +1,250 @@
+{
+  "name": "Daily store report → Telegram",
+  "nodes": [
+    {
+      "id": "n0008-0000-4000-8000-000000000000",
+      "name": "Every day 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n0009-0000-4000-8000-000000000000",
+      "name": "Get yesterday's orders",
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "createdAtMin": "={{ $now.minus({ days: 1 }).startOf('day').toISO() }}"
+        }
+      },
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "",
+          "name": "Shopify — my store"
+        }
+      }
+    },
+    {
+      "id": "n0010-0000-4000-8000-000000000000",
+      "name": "Calculate totals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Totals are computed here, not by the LLM\nconst orders = $input.all().map(i => i.json);\nconst total = orders.reduce((s, o) => s + Number(o.total_price), 0);\nconst count = {};\nfor (const o of orders) for (const li of o.line_items)\n  count[li.title] = (count[li.title] || 0) + li.quantity;\nconst top = Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, 3);\nreturn [{ json: { orders: orders.length, total, top } }];"
+      }
+    },
+    {
+      "id": "n0011-0000-4000-8000-000000000000",
+      "name": "Write summary (AI)",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "=راك محلل e-commerce.\nهاذو الأرقام تاع البارح: {{ JSON.stringify($json) }}\nاكتبلي ملخص قصير بالدارجة:\n- عدد الطلبيات والمجموع\n- أكثر 3 منتجات بيعا\n- أي حاجة غريبة لازم نشوفها\nما تخترعش أرقام: استعمل غير الداتا اللي عطيتك."
+      }
+    },
+    {
+      "id": "n0012-0000-4000-8000-000000000000",
+      "name": "Claude (Chat Model)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        720,
+        220
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-4-5"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "id": "n0013-0000-4000-8000-000000000000",
+      "name": "Send to Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1000,
+        0
+      ],
+      "parameters": {
+        "chatId": "123456789",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every day 08:00": {
+      "main": [
+        [
+          {
+            "node": "Get yesterday's orders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get yesterday's orders": {
+      "main": [
+        [
+          {
+            "node": "Calculate totals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate totals": {
+      "main": [
+        [
+          {
+            "node": "Write summary (AI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude (Chat Model)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write summary (AI)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write summary (AI)": {
+      "main": [
+        [
+          {
+            "node": "Send to Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Get yesterday's orders": [
+      {
+        "json": {
+          "id": 1001,
+          "name": "#1001",
+          "total_price": "4900.00",
+          "currency": "DZD",
+          "line_items": [
+            {
+              "title": "Montre classique",
+              "quantity": 1
+            }
+          ],
+          "financial_status": "pending",
+          "note": "مثال"
+        }
+      },
+      {
+        "json": {
+          "id": 1002,
+          "name": "#1002",
+          "total_price": "7800.00",
+          "currency": "DZD",
+          "line_items": [
+            {
+              "title": "Sac en cuir",
+              "quantity": 1
+            },
+            {
+              "title": "Portefeuille",
+              "quantity": 1
+            }
+          ],
+          "financial_status": "pending",
+          "note": "مثال"
+        }
+      },
+      {
+        "json": {
+          "id": 1003,
+          "name": "#1003",
+          "total_price": "4900.00",
+          "currency": "DZD",
+          "line_items": [
+            {
+              "title": "Montre classique",
+              "quantity": 1
+            }
+          ],
+          "financial_status": "pending",
+          "note": "مثال"
+        }
+      }
+    ],
+    "Write summary (AI)": [
+      {
+        "json": {
+          "text": "📊 Rapport تاع البارح (مثال)\n• 3 طلبيات — 17 600 DA\n• أكثر منتج: Montre classique (2)\n• ما كاين حتى حاجة غريبة ✅"
+        }
+      }
+    ],
+    "Send to Telegram": [
+      {
+        "json": {
+          "ok": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

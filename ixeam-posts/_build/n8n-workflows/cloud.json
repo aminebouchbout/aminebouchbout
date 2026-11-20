@@ -1,0 +1,217 @@
+{
+  "name": "Cloud sync → Dashboard (Looker Studio)",
+  "nodes": [
+    {
+      "id": "n0014-0000-4000-8000-000000000000",
+      "name": "Every hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n0015-0000-4000-8000-000000000000",
+      "name": "Shopify — orders",
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "",
+          "name": "Shopify — my store"
+        }
+      }
+    },
+    {
+      "id": "n0016-0000-4000-8000-000000000000",
+      "name": "Meta Ads — insights",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        200
+      ],
+      "parameters": {
+        "url": "https://graph.facebook.com/v21.0/act_ID/insights",
+        "options": {}
+      }
+    },
+    {
+      "id": "n0017-0000-4000-8000-000000000000",
+      "name": "GA4 — sessions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://analyticsdata.googleapis.com/v1beta/properties/ID:runReport",
+        "options": {}
+      }
+    },
+    {
+      "id": "n0018-0000-4000-8000-000000000000",
+      "name": "Merge sources",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        520,
+        200
+      ],
+      "parameters": {
+        "numberInputs": 3
+      }
+    },
+    {
+      "id": "n0019-0000-4000-8000-000000000000",
+      "name": "Calculate KPIs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        200
+      ],
+      "parameters": {
+        "jsCode": "// KPIs computed from the 3 sources\nconst [shop, ads, ga] = [0, 1, 2].map(i => $input.all()[i]?.json ?? {});\nconst sales   = shop.total_sales ?? 0;   // Shopify\nconst orders  = shop.orders ?? 0;\nconst spend   = ads.spend ?? 0;          // Meta Ads\nconst sessions = ga.sessions ?? 0;       // GA4\nreturn [{ json: {\n  roas: spend ? sales / spend : null,\n  cpa: orders ? spend / orders : null,\n  conversion_rate: sessions ? (orders / sessions) * 100 : null,\n  delivery_rate: shop.confirmed ? (shop.delivered / shop.confirmed) * 100 : null,\n} }];"
+      }
+    },
+    {
+      "id": "n0020-0000-4000-8000-000000000000",
+      "name": "Save to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1000,
+        200
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "dashboard"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every hour": {
+      "main": [
+        [
+          {
+            "node": "Shopify — orders",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Meta Ads — insights",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GA4 — sessions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify — orders": {
+      "main": [
+        [
+          {
+            "node": "Merge sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meta Ads — insights": {
+      "main": [
+        [
+          {
+            "node": "Merge sources",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "GA4 — sessions": {
+      "main": [
+        [
+          {
+            "node": "Merge sources",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge sources": {
+      "main": [
+        [
+          {
+            "node": "Calculate KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate KPIs": {
+      "main": [
+        [
+          {
+            "node": "Save to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "name": "Ask your store (MCP)",
+  "nodes": [
+    {
+      "id": "n0025-0000-4000-8000-000000000000",
+      "name": "Chat with your store",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "options": {}
+      }
+    },
+    {
+      "id": "n0026-0000-4000-8000-000000000000",
+      "name": "AI Agent — Store analyst",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        300,
+        0
+      ],
+      "parameters": {
+        "options": {
+          "systemMessage": "Answer only from the store data returned by the tools. Read only."
+        }
+      }
+    },
+    {
+      "id": "n0027-0000-4000-8000-000000000000",
+      "name": "Claude (Chat Model)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        160,
+        240
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-4-5"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "id": "n0028-0000-4000-8000-000000000000",
+      "name": "Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        330,
+        240
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "n0029-0000-4000-8000-000000000000",
+      "name": "Shopify MCP (read only)",
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        500,
+        240
+      ],
+      "parameters": {
+        "endpointUrl": "https://your-store.myshopify.com/api/mcp",
+        "serverTransport": "httpStreamable",
+        "include": "all"
+      }
+    }
+  ],
+  "connections": {
+    "Chat with your store": {
+      "main": [
+        [
+          {
+            "node": "AI Agent — Store analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude (Chat Model)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent — Store analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent — Store analyst",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify MCP (read only)": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent — Store analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

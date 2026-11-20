@@ -97,6 +97,24 @@
     box-shadow:0 24px 50px -18px rgba(109,123,247,.7)}
   .follow{margin-top:20px;font-size:30px}
 
+  .shot{margin-top:26px;border-radius:26px;overflow:hidden;background:#fff;border:2px solid var(--line);
+    box-shadow:0 26px 60px -26px rgba(60,40,160,.45)}
+  .shot .sb{display:flex;align-items:center;gap:10px;padding:14px 22px;background:#f1eefc;direction:ltr;border-bottom:2px solid var(--line)}
+  .shot .sb .dot{width:14px;height:14px}
+  .shot .sb .lb{font-family:'JetBrains Mono';font-weight:700;font-size:20px;color:#6b6f9a;margin-left:10px}
+  .shot .sb .live{margin-left:auto;font-family:'JetBrains Mono';font-weight:700;font-size:18px;color:#12804f;background:#d9f7e8;border-radius:999px;padding:2px 14px}
+  .shot img{display:block;width:100%;height:auto;object-fit:cover}
+  .side{display:flex;gap:28px;align-items:flex-start;margin-top:26px}
+  .side .pts{flex:1;margin-top:0;gap:18px}
+  .side .pts .row{flex-direction:column;align-items:flex-start;gap:6px}
+  .side .shot{flex:0 0 470px;margin-top:0}
+  .side .shot .lb{font-size:17px}
+  .side .shot .live{display:none}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:130px}
+  .pts{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+  .pts .row{margin-top:0;font-size:33px}
+  .pts .row .chip{font-size:24px}
+  .hookshot{margin-top:30px}
   .foot{position:absolute;left:80px;right:80px;bottom:62px;display:flex;justify-content:space-between;align-items:center}
   .foot .sw{font-weight:800;font-size:32px;color:#6d3fe6}
   .dots{display:flex;gap:10px;align-items:center;direction:ltr}
@@ -109,7 +127,7 @@
 <div class="frame" id="f"></div>
 <div class="foot" id="foot"></div>
 <script>
-const LATIN=/[A-Za-z0-9@#{][A-Za-z0-9@#_.\-+/'%{}():÷×=]*(?: [A-Za-z0-9@#{(×+=÷/\-][A-Za-z0-9@#_.\-+/'%{}():÷×=]*)*/g;
+const LATIN=/[A-Za-z0-9@#{][A-Za-z0-9@#_.\-+/'%{}:÷×=]*(?: [A-Za-z0-9@#{×+=÷/\-][A-Za-z0-9@#_.\-+/'%{}:÷×=]*)*/g;
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function lat(s){return esc(s.replace(/ـ /g,'ـ\u00a0')).replace(LATIN,m=>{const t=m.match(/[.:،]+$/);const c=t?m.slice(0,-t[0].length):m;return `<bdi>${c}</bdi>`+(t?t[0]:'')})}
 // *x* = gradient highlight, [x] = placeholder (mono cyan)
@@ -129,9 +147,20 @@ function topRow(s){
   if(!s.counter&&!s.tag) return '';
   return `<div class="toprow"><span class="chip ${CC[s.tagColor||'v']} tagm">${T(s.tag||'')}</span><span class="chip c-c counter"><bdi>${s.counter||''}</bdi></span></div>`;
 }
+function shot(s,h){
+  return `<div class="shot ${s.hook?'hookshot':''}"><div class="sb"><span class="dot" style="background:#f472b6"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#34d399"></span><span class="lb">${esc(s.imgLabel||'n8n · workflow')}</span><span class="live">REAL SCREENSHOT</span></div>
+    <img src="${s.img}" style="max-height:${h}px;object-position:${s.pos||'50% 0%'}"></div>`;
+}
+function pts(rows){return rows&&rows.length?`<div class="pts">${rows.map(r=>`<div class="row"><span class="chip ${CC[r[0]]}">${T(r[1])}</span><span>${T(r[2])}</span></div>`).join('')}</div>`:''}
 function render(s,idx,total){
   const f=document.getElementById('f'); let h=logo;
-  if(s.type==='hook'){
+  if(s.type==='shot'){
+    h+=topRow(s)+`<h2>${T(s.title)}</h2>${s.sub?`<div class="sub">${T(s.sub)}</div>`:''}`+`<div class="body">`+(s.side?`<div class="side">${pts(s.rows)}${shot(s,s.h||700)}</div>`:shot(s,s.h||480)+pts(s.rows))+
+      (s.note?`<div class="card note"><span class="chip ${CC[s.note[0]]}">${T(s.note[1])}</span><span>${T(s.note[2])}</span></div>`:'')+`</div>`;
+  } else if(s.type==='hookshot'){
+    h+=`<div class="toprow"><span class="chip c-v">${T(s.badge)}</span><span></span></div>
+        <h1 class="big ${s.size||''}" style="margin-top:30px">${T(s.title)}</h1><div class="sub">${T(s.sub)}</div><div class="body">`+shot(Object.assign({hook:1},s),s.h||520)+`</div>`;
+  } else if(s.type==='hook'){
     h+=`<div class="toprow"><span class="chip c-v">${T(s.badge)}</span><span></span></div>
         <h1 class="big ${s.size||''}">${T(s.title)}</h1><div class="sub">${T(s.sub)}</div>
         <div class="card check"><div class="q">شنو غادي تاخد من هاد البوست؟</div>

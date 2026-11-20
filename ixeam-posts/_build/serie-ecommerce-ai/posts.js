@@ -1,34 +1,31 @@
-// Série "AI × E-commerce" — 7 carrousels, un par jour à 16:30 (Algérie)
+// Série "AI × E-commerce" v2 — chaque slide avec une vraie capture n8n
+const L = { n8n: 'n8n · workflow', ndv: 'n8n · node', form: 'n8n · form' };
 module.exports = [
 {
   dir: '2026-11-24-ai-agent-store',
   slides: [
-    {type:'hook', badge:'للتجار أونلاين', title:'خلي *AI Agent* يعاونك تسيّر الـ Store', sub:'شنو هو، وكيفاش يخدم من الداخل',
-     items:['الفرق بين Chatbot و Agent','الـ 4 قطع اللي يتبنى بيهم','شنو يقدر يدير في الـ Store']},
-    {type:'cards', counter:'1/4', tag:'CHATBOT VS AGENT', title:'Chatbot ولا *Agent*؟', sub:'ماشي نفس الحاجة',
-     items:[
-      {t:'الـ Chatbot', rows:[['p','يدير','يجاوب على الأسئلة برك'],['v','مثال','«شحال سومة التوصيل؟»']]},
-      {t:'الـ AI Agent', rows:[['g','يدير','يفهم، يقرر، ويدير Action بالـ Tools'],['v','مثال','يشوف الـ Stock ويجاوب بالمعلومة الصحيحة']]},
-      {t:'الفرق الكبير', rows:[['c','السر','الـ Agent موصول بالـ Store عبر API'],['a','نصيحة','ابدا بـ Read only قبل أي صلاحية أخرى']]},
-     ]},
-    {type:'flow', counter:'2/4', tag:'HOW IT WORKS', title:'كيفاش يخدم *من الداخل*', nodes:[
-      {t:'الكليان يبعث ميساج', d:'«وين راهي الطلبية تاعي؟»'},
-      {t:'الـ LLM يفهم الطلب', d:'ويقرر واش لازم يدير', key:true},
-      {t:'يختار Tool', d:'يقلب على الطلبية في الـ Store', chip:'get_order'},
-      {t:'الـ Store API يرجع الداتا', d:'الحالة الحقيقية تاع الطلبية'},
-      {t:'يجاوب الكليان', d:'بالمعلومة الصحيحة، ماشي بالتخمين', key:true},
+    {type:'hookshot', badge:'للتجار أونلاين', title:'خلي *AI Agent* يعاونك تسيّر الـ Store', size:'md', sub:'هذا Agent حقيقي بنيناه في n8n 👇', img:'img/agent-exec.jpg', imgLabel:L.n8n, h:470},
+    {type:'shot', counter:'1/4', tag:'CHATBOT VS AGENT', title:'Chatbot ولا *Agent*؟', img:'img/agent-output.jpg', imgLabel:'n8n · AI Agent output', h:470, rows:[
+      ['p','الـ Chatbot','يجاوب على الأسئلة برك'],
+      ['g','الـ Agent','يفهم، يقرر، ويستعمل Tools'],
+      ['c','الـ Tools','يقرا الطلبية من الـ Store قبل ما يجاوب'],
+      ['v','في الصورة','الجواب اللي خرج من الـ Agent (مثال)'],
     ]},
-    {type:'cards', counter:'3/4', tag:'ARCHITECTURE', title:'الـ 4 قطع تاع أي *Agent*', compact:true, items:[
-      {t:'الـ LLM = المخ', rows:[['v','دورو','يفهم الطلب ويقرر الخطوة الجاية']]},
-      {t:'الـ Tools = اليدين', rows:[['c','أمثلة','Shopify API، Google Sheets، WhatsApp']]},
-      {t:'الـ Memory = الذاكرة', rows:[['g','دورها','يتفكر الكونفيرساسيون والكونتكست']]},
-      {t:'الـ System Prompt = القواعد', rows:[['p','دورو','واش يقدر يدير، وواش ممنوع']]},
+    {type:'shot', counter:'2/4', tag:'ARCHITECTURE', title:'الـ 4 قطع تاع أي *Agent*', img:'img/agent-zoom.jpg', imgLabel:L.n8n, h:560, rows:[
+      ['v','LLM','المخ: يفهم ويقرر (هنا Claude)'],
+      ['c','Tools','اليدين: Get order، Check stock'],
+      ['g','Memory','يتفكر الكونفيرساسيون'],
+      ['p','System Prompt','القواعد: واش يقدر يدير'],
     ]},
-    {type:'cards', counter:'4/4', tag:'USE CASES', title:'شنو يقدر يدير في *الـ Store*', compact:true, items:[
-      {t:'Customer Support', rows:[['g','مثال','يجاوب على حالة الطلبية 24/24']]},
-      {t:'الطلبيات', rows:[['a','مهم','يحضّر الطلبية ويستنى الموافقة تاعك']]},
-      {t:'Reporting', rows:[['c','مثال','يبعثلك ملخص المبيعات كل صباح']]},
-      {t:'Stock Alert', rows:[['p','مثال','ينبهك كي منتج قرب يخلاص']]},
+    {type:'shot', counter:'3/4', tag:'HUMAN IN THE LOOP', tagColor:'a', title:'القرارات المهمة تبقى *عندك*', img:'img/hitl.jpg', imgLabel:L.n8n, h:420, rows:[
+      ['a','مثال','طلب Refund: الـ AI يحضّر القرار'],
+      ['v','الموافقة','توصلك في Telegram: Approve ولا Decline'],
+      ['g','النتيجة','حتى Action حساس ما يتدار بلا موافقتك'],
+    ]},
+    {type:'shot', counter:'4/4', tag:'USE CASES', title:'شنو يقدر يدير في *الـ Store*', img:'img/report-exec.jpg', imgLabel:L.n8n, h:360, rows:[
+      ['g','Support','يجاوب على حالة الطلبية'],
+      ['c','Reporting','ملخص المبيعات كل صباح (الصورة)'],
+      ['p','Stock','ينبهك كي منتج قرب يخلاص'],
     ]},
     {type:'cta', title:'تحب *Agent* للـ Store تاعك؟', items:['Agent للميساجات Instagram / Messenger','Agent موصول بالـ Store','Reporting أوتوماتيك']},
   ],
@@ -37,30 +34,24 @@ module.exports = [
 {
   dir: '2026-11-25-spy-tools-ai',
   slides: [
-    {type:'hook', badge:'Spy Tools × AI', title:'شوف واش *يخدم* عند المنافسين', sub:'وخلي الـ AI يحلل بلاصتك',
-     items:['شنو هي الـ Spy Tools','أدوات مجانية ورسمية','كيفاش تحلل الـ Ads بالـ AI']},
-    {type:'cards', counter:'1/4', tag:'SPY TOOLS', title:'شنو هي *الـ Spy Tools*؟', sub:'أدوات تخليك تفهم السوق', items:[
-      {t:'Ad Spy', rows:[['v','تشوف','الـ Ads اللي راهم يدورو'],['c','تتعلم','الـ Hook، الـ Creative، الـ Offer']]},
-      {t:'Product Research', rows:[['v','تشوف','المنتجات اللي راهي تطلع'],['c','تتعلم','الـ Trends قبل ما يتشبع السوق']]},
-      {t:'Store Spy', rows:[['v','تشوف','الـ Store تاع المنافس'],['c','تتعلم','الأسعار، الـ Landing Page، الـ Offers']]},
+    {type:'hookshot', badge:'Spy Tools × AI', title:'شوف واش *يخدم* عند المنافسين', size:'md', sub:'وخلي الـ AI يحلل بلاصتك 👇', img:'img/ads.jpg', imgLabel:L.n8n, h:470},
+    {type:'shot', counter:'1/3', tag:'FREE + OFFICIAL', tagColor:'g', title:'جمع الـ Ads *بالمجان*', side:true, img:'img/form.jpg', imgLabel:L.form, h:640, rows:[
+      ['g','Meta Ad Library','الـ Ads اللي راهم Active في Facebook و Instagram'],
+      ['g','TikTok Creative Center','الـ Top Ads والـ Trends'],
+      ['g','Google Trends','واش الناس يقلبو عليه في الجزائر'],
+      ['v','في الصورة','Form تحط فيه الـ Ad والـ Offer'],
     ]},
-    {type:'cards', counter:'2/4', tag:'FREE + OFFICIAL', tagColor:'g', title:'أدوات *مجانية* ورسمية', sub:'ابدا بيهم قبل ما تخلص', items:[
-      {t:'Meta Ad Library', rows:[['g','فيها','الـ Ads اللي راهم Active في Facebook و Instagram'],['v','نصيحة','فلتر بالبلاد والكلمة']]},
-      {t:'TikTok Creative Center', rows:[['g','فيها','الـ Top Ads والـ Trends في TikTok']]},
-      {t:'Google Trends', rows:[['g','فيها','واش الناس راهم يقلبو عليه'],['v','نصيحة','اختار Algeria وقارن بين كلمات']]},
-    ]},
-    {type:'flow', counter:'3/4', tag:'SPY + AI', title:'Spy + AI = *تحليل سريع*', nodes:[
-      {t:'جمع الـ Ads تاع المنافسين', d:'من الـ Ad Library: الـ Text + Screenshots'},
-      {t:'حطهم في الـ AI', d:'مع Prompt واضح', key:true},
-      {t:'يطلعلك الـ Patterns', d:'الـ Hooks، الـ Angles، الـ Offers اللي يتعاودو'},
-      {t:'تبني Creative تاعك', d:'نفس الفكرة، بأسلوبك — ماشي Copy', key:true},
-    ], note:['a','تنبيه','الـ AI يقدر يغلط في التحليل: راجع بعينيك']},
-    {type:'cards', counter:'4/4', tag:'CHECKLIST', title:'واش تشوف في *كل Ad*', compact:true, items:[
-      {t:'تاريخ البداية', rows:[['g','إشارة','Ad قديم ومازال يدور = غالبا يجيب نتيجة']]},
-      {t:'الـ Hook', rows:[['v','سؤال','شنو قال في أول 3 ثواني؟']]},
-      {t:'الـ Offer', rows:[['c','سؤال','السومة، التوصيل، الضمان؟']]},
-      {t:'الكومنتارات', rows:[['p','سؤال','شنو يسقسو الناس؟ على واش يشكيو؟']]},
-    ]},
+    {type:'shot', counter:'2/3', tag:'WORKFLOW', title:'الـ AI يحلل *في ثواني*', img:'img/ads.jpg', imgLabel:L.n8n, h:420, rows:[
+      ['v','1','الـ Form: تحط الـ Ad تاع المنافس'],
+      ['c','2','الـ AI يطلّع الـ Hook، الـ Angle، الـ Offer'],
+      ['g','3','كلش يتسجل في Google Sheets'],
+    ], note:['a','تنبيه','الـ AI يقدر يغلط: راجع بعينيك']},
+    {type:'shot', counter:'3/3', tag:'CHECKLIST', title:'واش تشوف في *كل Ad*', side:true, img:'img/form.jpg', imgLabel:L.form, h:640, rows:[
+      ['g','تاريخ البداية','Ad قديم ومازال يدور = غالبا يجيب نتيجة'],
+      ['v','الـ Hook','شنو قال في أول 3 ثواني؟'],
+      ['c','الـ Offer','السومة، التوصيل، الضمان؟'],
+      ['p','الكومنتارات','شنو يسقسو الناس؟ على واش يشكيو؟'],
+    ], note:['p','القاعدة','خوذ الفكرة، ماشي الـ Copy']},
     {type:'cta', title:'تحب نحللو *المنافسين* تاعك؟', items:['تحليل الـ Ads تاع المنافسين','Hooks و Angles جداد بالـ AI','Creative جاهز للـ Ads']},
   ],
   story_poll: ['تستعمل Spy Tools؟','دايما','عمري'],
@@ -68,30 +59,24 @@ module.exports = [
 {
   dir: '2026-11-26-connect-store-ai',
   slides: [
-    {type:'hook', badge:'Shopify × AI', title:'كيفاش *تربط* الـ Store تاعك بالـ AI', size:'md', sub:'الـ API والـ MCP بالدارجة',
-     items:['3 طرق باش تربط','كيفاش يخدم الـ MCP','الأمان قبل كلش']},
-    {type:'cards', counter:'1/4', tag:'3 WAYS', title:'3 طرق باش *تربط*', sub:'من الأسهل للأقوى', items:[
-      {t:'Apps جاهزين', rows:[['g','مليح','الأسهل: تركّب الـ App وتبدا'],['p','حدود','ما تقدرش تبدل كيما تحب']]},
-      {t:'API + n8n', rows:[['g','مليح','Workflow يقرا ويكتب في الـ Store'],['p','حدود','يحتاج شوية Setup']]},
-      {t:'MCP', rows:[['g','مليح','الـ AI يخدم مع الـ Store بالـ Tools مباشرة'],['v','مثال','Claude + Shopify']]},
+    {type:'hookshot', badge:'Shopify × AI', title:'كيفاش *تربط* الـ Store تاعك بالـ AI', size:'md', sub:'Agent يقرا الـ Store عبر MCP 👇', img:'img/mcp.jpg', imgLabel:L.n8n, h:470},
+    {type:'shot', counter:'1/3', tag:'3 WAYS', title:'3 طرق باش *تربط*', side:true, img:'img/report-input.jpg', imgLabel:'Shopify → n8n', h:640, rows:[
+      ['g','Apps جاهزين','الأسهل: تركّب الـ App وتبدا'],
+      ['v','API + n8n','Workflow يقرا ويكتب في الـ Store'],
+      ['c','MCP','الـ AI يستعمل Tools تاع الـ Store مباشرة'],
+      ['p','في الصورة','طلبيات Shopify كيما توصل لـ n8n (مثال)'],
     ]},
-    {type:'flow', counter:'2/4', tag:'MCP', title:'الـ MCP *كيفاش يخدم*', sub:'Model Context Protocol', nodes:[
-      {t:'تسقسي الـ AI', d:'«شحال بعت هاد السيمانة؟»'},
-      {t:'الـ AI يختار Tool', d:'يعرف أي Tool يجاوب على السؤال', key:true, chip:'analytics_query'},
-      {t:'الـ MCP Server', d:'يبعث الطلب للـ Store'},
-      {t:'الجواب بالأرقام تاعك', d:'من الداتا الحقيقية تاع الـ Store', key:true},
+    {type:'shot', counter:'2/3', tag:'MCP', title:'الـ MCP *كيفاش يخدم*', side:true, img:'img/mcp-ndv.jpg', imgLabel:'n8n · MCP Client', h:640, rows:[
+      ['v','1','تسقسي: «شحال بعت هاد السيمانة؟»'],
+      ['c','2','الـ AI يختار الـ Tool المناسب'],
+      ['g','3','الـ MCP Server يجيب الداتا من الـ Store'],
+      ['p','4','الجواب بالأرقام تاعك، ماشي بالتخمين'],
     ]},
-    {type:'cards', counter:'3/4', tag:'ASK YOUR STORE', title:'أسئلة تقدر *تسقسيها*', compact:true, items:[
-      {t:'«شنو هوما المنتجات اللي بعتو أكثر هاد الشهر؟»', num:false},
-      {t:'«شحال من طلبية مازال ما تبعثتش؟»', num:false},
-      {t:'«أي منتج الـ Stock تاعو قليل؟»', num:false},
-      {t:'«قارن المبيعات تاع هاد السيمانة مع اللي فاتت»', num:false},
-    ], note:['g','النتيجة','الجواب من الداتا تاع الـ Store، ماشي من التخمين']},
-    {type:'cards', counter:'4/4', tag:'SECURITY', tagColor:'p', title:'الأمان *قبل كلش*', compact:true, items:[
-      {t:'Read only في البداية', rows:[['g','علاش','يقرا برك قبل ما تعطيه يكتب']]},
-      {t:'Scopes محدودين', rows:[['v','القاعدة','اعطيه غير الصلاحيات اللي يحتاجها']]},
-      {t:'Human in the loop', rows:[['a','مثال','تبديل السومة ولا Refund يستنى الموافقة تاعك']]},
-      {t:'الـ Access Token سر', rows:[['p','ممنوع','ما تبارطاجيهش مع حتى واحد']]},
+    {type:'shot', counter:'3/3', tag:'SECURITY', tagColor:'p', title:'الأمان *قبل كلش*', side:true, img:'img/hitl-ndv.jpg', imgLabel:'n8n · Telegram', h:640, rows:[
+      ['g','Read only','يقرا برك قبل ما تعطيه يكتب'],
+      ['v','Scopes','غير الصلاحيات اللي يحتاجها'],
+      ['a','Human in the loop','Refund يستنى Approve تاعك (الصورة)'],
+      ['p','Access Token','ما تبارطاجيهش مع حتى واحد'],
     ]},
     {type:'cta', title:'نربطولك الـ Store *بالـ AI*', items:['ربط Shopify بالـ AI','Workflows أوتوماتيك بـ n8n','Setup آمن بالصلاحيات الصحيحة']},
   ],
@@ -100,31 +85,22 @@ module.exports = [
 {
   dir: '2026-11-27-cloud-dashboard',
   slides: [
-    {type:'hook', badge:'Cloud × Data', title:'الأرقام تاعك *مفرقة*؟', sub:'جمعهم في Dashboard واحد في الـ Cloud',
-     items:['علاش الداتا المفرقة مشكل','الـ Stack البسيط في الـ Cloud','الأرقام اللي تتبعها كل يوم']},
-    {type:'cards', counter:'1/4', tag:'THE PROBLEM', tagColor:'p', title:'كل رقم في *بلاصة*', items:[
-      {t:'الـ Store', rows:[['v','فيه','الطلبيات والمبيعات']]},
-      {t:'الـ Ads', rows:[['v','فيه','الـ Spend والنتائج في Ads Manager']]},
-      {t:'الـ Traffic', rows:[['v','فيه','الزوار والمصادر في GA4']]},
-    ], note:['p','النتيجة','صعيب تشوف الربح الحقيقي في بلاصة وحدة']},
-    {type:'flow', counter:'2/4', tag:'CLOUD STACK', title:'الـ Stack *في الـ Cloud*', nodes:[
-      {t:'المصادر', d:'Shopify · Meta Ads · GA4'},
-      {t:'Sync أوتوماتيك', d:'n8n ولا Connector جاهز', key:true},
-      {t:'الداتا في الـ Cloud', d:'Google Sheets ولا BigQuery'},
-      {t:'الـ Dashboard', d:'Looker Studio — تشوفو من التليفون'},
-      {t:'الـ AI يقرا الأرقام', d:'ويبعثلك ملخص ولا تنبيه', key:true},
+    {type:'hookshot', badge:'Cloud × Data', title:'الأرقام تاعك *مفرقة*؟', sub:'جمعهم أوتوماتيك في الـ Cloud 👇', img:'img/cloud.jpg', imgLabel:L.n8n, h:520},
+    {type:'shot', counter:'1/3', tag:'SOURCES', title:'كل مصدر *يتجمع* وحدو', img:'img/cloud-sources.jpg', imgLabel:L.n8n, h:470, rows:[
+      ['v','Shopify','الطلبيات والمبيعات'],
+      ['c','Meta Ads','الـ Spend والنتائج'],
+      ['g','GA4','الزوار والمصادر'],
+    ], note:['p','النتيجة','تشوف الربح الحقيقي في بلاصة وحدة']},
+    {type:'shot', counter:'2/3', tag:'KPIs', title:'الـ KPIs *يتحسبو* وحدهم', img:'img/kpi-code.jpg', imgLabel:'n8n · Calculate KPIs', h:340, rows:[
+      ['v','ROAS','المبيعات ÷ مصروف الـ Ads'],
+      ['c','CPA','مصروف الـ Ads ÷ عدد الطلبيات'],
+      ['g','Conversion Rate','الطلبيات ÷ الزوار × 100'],
+      ['a','Delivery Rate','اللي توصلات ÷ المأكدة (COD)'],
     ]},
-    {type:'cards', counter:'3/4', tag:'KPIs', title:'الأرقام اللي *تتبعها*', compact:true, items:[
-      {t:'ROAS', rows:[['v','الحساب','المبيعات ÷ مصروف الـ Ads']]},
-      {t:'CPA', rows:[['c','الحساب','مصروف الـ Ads ÷ عدد الطلبيات']]},
-      {t:'Conversion Rate', rows:[['g','الحساب','الطلبيات ÷ الزوار × 100']]},
-      {t:'Delivery Rate', rows:[['a','COD','الطلبيات اللي توصلات ÷ الطلبيات المأكدة']]},
-    ]},
-    {type:'cards', counter:'4/4', tag:'WHY CLOUD', title:'علاش *الـ Cloud*؟', compact:true, items:[
-      {t:'وين ما كنت', rows:[['v','كيفاش','تشوف كلش من التليفون']]},
-      {t:'الداتا تتحدث وحدها', rows:[['c','كيفاش','بلا Copy / Paste كل يوم']]},
-      {t:'Backup', rows:[['g','كيفاش','الداتا ما تضيعش كي يطيح الـ PC']]},
-      {t:'الـ AI يحلل', rows:[['p','كيفاش','ينبهك كي رقم مهم يتبدل']]},
+    {type:'shot', counter:'3/3', tag:'CLOUD', title:'الـ Stack *في الـ Cloud*', img:'img/cloud.jpg', imgLabel:L.n8n, h:460, rows:[
+      ['v','Sync','n8n يخدم كل ساعة وحدو'],
+      ['c','Database','Google Sheets ولا BigQuery'],
+      ['g','Dashboard','Looker Studio: تشوفو من التليفون'],
     ]},
     {type:'cta', title:'تحب *Dashboard* للـ Store تاعك؟', items:['Dashboard: Store + Ads + Traffic','Sync أوتوماتيك في الـ Cloud','Rapport يومي بالـ AI']},
   ],
@@ -133,16 +109,17 @@ module.exports = [
 {
   dir: '2026-11-28-n8n-daily-report',
   slides: [
-    {type:'hook', badge:'n8n Workflow', title:'*Rapport* الـ Store يوصلك كل صباح في Telegram', size:'md', sub:'Workflow بسيط في n8n',
-     items:['الـ Nodes اللي نحتاجوهم','كيفاش يخدم خطوة بخطوة','الـ Prompt تاع الملخص']},
-    {type:'flow', counter:'1/4', tag:'WORKFLOW', title:'الـ Workflow *خطوة بخطوة*', nodes:[
-      {t:'Schedule Trigger', d:'يشعل وحدو كل صباح', chip:'08:00'},
-      {t:'Shopify', d:'يجيب الطلبيات تاع البارح', chip:'Get many orders'},
-      {t:'Code', d:'يحسب المجموع وأكثر المنتجات بيعا', key:true},
-      {t:'LLM', d:'يكتب ملخص قصير بالدارجة'},
-      {t:'Telegram', d:'يبعثلك الميساج', key:true, chip:'Send message'},
+    {type:'hookshot', badge:'n8n Workflow', title:'*Rapport* الـ Store يوصلك كل صباح', size:'md', sub:'Workflow حقيقي: Shopify → AI → Telegram 👇', img:'img/report-exec.jpg', imgLabel:L.n8n, h:420},
+    {type:'shot', counter:'1/4', tag:'STEP 1', title:'يجيب الطلبيات *تاع البارح*', side:true, img:'img/report-input.jpg', imgLabel:'n8n · Shopify', h:640, rows:[
+      ['v','Schedule Trigger','يشعل وحدو كل يوم 08:00'],
+      ['g','Shopify','Get many orders'],
+      ['c','في الصورة','الطلبيات كيما يرجعو من الـ Store (مثال)'],
     ]},
-    {type:'prompt', counter:'2/4', tag:'PROMPT', title:'الـ Prompt تاع *الملخص*', file:'daily-report.txt', lines:[
+    {type:'shot', counter:'2/4', tag:'STEP 2', title:'الحساب في *الـ Code*', img:'img/report-code.jpg', imgLabel:'n8n · Code node', h:330, rows:[
+      ['a','علاش','الـ LLM يقدر يغلط في الحساب'],
+      ['g','النتيجة','3 طلبيات — 17600 DA (مثال)'],
+    ], note:['v','القاعدة','الحساب للـ Code، الكتابة للـ AI']},
+    {type:'prompt', counter:'3/4', tag:'STEP 3', title:'الـ Prompt تاع *الملخص*', file:'daily-report.txt', lines:[
       'راك محلل e-commerce.',
       'هاذو الأرقام تاع البارح: [stats]',
       '',
@@ -153,15 +130,10 @@ module.exports = [
       '',
       'ما تخترعش أرقام: استعمل غير الداتا اللي عطيتك.',
     ], note:['v','مثال','[stats] = النتيجة تاع الـ Code node']},
-    {type:'cards', counter:'3/4', tag:'PRO TIPS', title:'3 نصائح *مهمين*', items:[
-      {t:'الحساب في الـ Code، ماشي في الـ LLM', rows:[['a','علاش','الـ LLM يقدر يغلط في الحساب']]},
-      {t:'الـ Credentials في بلاصتهم', rows:[['v','كيفاش','خزن الـ Tokens في n8n Credentials']]},
-      {t:'Error Workflow', rows:[['p','علاش','باش تعرف كي الـ Workflow يطيح']]},
-    ]},
-    {type:'cards', counter:'4/4', tag:'NEXT LEVEL', tagColor:'g', title:'زيد *طوّر* الـ Workflow', compact:true, items:[
-      {t:'زيد الـ Ads Spend', rows:[['v','النتيجة','تشوف الـ ROAS تاع البارح']]},
-      {t:'Stock Alert', rows:[['c','النتيجة','ينبهك كي منتج قرب يخلاص']]},
-      {t:'Rapport سيمانة', rows:[['g','النتيجة','مقارنة مع السيمانة اللي فاتت']]},
+    {type:'shot', counter:'4/4', tag:'STEP 4', title:'يوصلك في *Telegram*', side:true, img:'img/telegram-ndv.jpg', imgLabel:'n8n · Telegram', h:640, rows:[
+      ['v','Send message','الملخص يتبعث للـ Chat تاعك'],
+      ['g','Credentials','الـ Token محفوظ في n8n'],
+      ['p','Error Workflow','باش تعرف كي يطيح'],
     ]},
     {type:'cta', title:'تحب *Workflow* كيما هذا؟', items:['Rapport يومي أوتوماتيك','Workflows مخصصين بـ n8n','Telegram ولا WhatsApp ولا Email']},
   ],
@@ -170,18 +142,20 @@ module.exports = [
 {
   dir: '2026-11-29-myths-ai-ecommerce',
   slides: [
-    {type:'hook', badge:'Myth vs Reality', title:'*5 أفكار غالطة* على الـ AI في الـ E-commerce', size:'md', sub:'واش صح وواش لا',
-     items:['شنو يقدر يدير الـ AI بصح','شنو ما يقدرش','كيفاش تخدم بيه بلا مشاكل']},
-    {type:'cards', counter:'1/3', tag:'MYTH VS REALITY', title:'*الخرافة* ولا الحقيقة؟', items:[
-      {t:'«الـ AI يسيّر الـ Store وحدو»', num:true, rows:[['g','الحقيقة','يدير المهام المتكررة، والقرارات تبقى عندك']]},
-      {t:'«الـ AI ما يغلطش»', rows:[['g','الحقيقة','يقدر يغلط ويخترع — Hallucination'],['v','الحل','اربطو بالداتا الحقيقية وراجع']]},
+    {type:'hookshot', badge:'Myth vs Reality', title:'*5 أفكار غالطة* على الـ AI في الـ E-commerce', size:'md', sub:'واش صح وواش لا 👇', img:'img/agent-exec.jpg', imgLabel:L.n8n, h:440},
+    {type:'shot', counter:'1/3', tag:'MYTH 1 + 2', title:'«الـ AI يسيّر *وحدو*»', side:true, img:'img/agent-ndv.jpg', imgLabel:'n8n · System Prompt', h:640, rows:[
+      ['g','الحقيقة','يدير المهام المتكررة، والقرارات عندك'],
+      ['p','«ما يغلطش»','يقدر يغلط ويخترع — Hallucination'],
+      ['v','الحل','اربطو بالداتا الحقيقية + قواعد واضحة'],
     ]},
-    {type:'cards', counter:'2/3', tag:'MYTH VS REALITY', title:'*الخرافة* ولا الحقيقة؟', items:[
-      {n:3, t:'«لازم تكون Developer»', rows:[['g','الحقيقة','أدوات Low-code كيما n8n تبسّط بزاف']]},
-      {n:4, t:'«الـ Spy Tools = تكوبي»', rows:[['g','الحقيقة','تفهم السوق، والـ Creative يكون تاعك']]},
+    {type:'shot', counter:'2/3', tag:'MYTH 3 + 4', title:'«لازم تكون *Developer*»', img:'img/report-exec.jpg', imgLabel:L.n8n, h:340, rows:[
+      ['g','الحقيقة','أدوات Low-code كيما n8n تبسّط بزاف'],
+      ['p','«Spy = تكوبي»','لا: تفهم السوق، والـ Creative تاعك'],
     ]},
-    {type:'cards', counter:'3/3', tag:'MYTH VS REALITY', title:'*الخرافة* ولا الحقيقة؟', items:[
-      {n:5, t:'«الـ Cloud خطير على الداتا»', rows:[['g','الحقيقة','الخطر الكبير: Passwords ضعاف وصلاحيات بزاف'],['v','الحل','2FA وصلاحيات محدودة']]},
+    {type:'shot', counter:'3/3', tag:'MYTH 5', title:'«الـ Cloud *خطير*»', side:true, img:'img/hitl-ndv.jpg', imgLabel:'n8n · Approval', h:640, rows:[
+      ['g','الحقيقة','الخطر: Passwords ضعاف وصلاحيات بزاف'],
+      ['v','الحل','2FA وصلاحيات محدودة'],
+      ['a','والـ Actions','Approve قبل أي حاجة حساسة (الصورة)'],
     ], note:['v','القاعدة','الـ AI مساعد قوي، ماشي بديل للتاجر']},
     {type:'cta', title:'شكون فيهم *كنت تامن* بيه؟', sub:'قولنا في الكومنتار 👇', items:['AI Agents للـ Store','Workflows بـ n8n','Dashboards في الـ Cloud']},
   ],
@@ -190,14 +164,13 @@ module.exports = [
 {
   dir: '2026-11-30-prompt-analyse-ads',
   slides: [
-    {type:'hook', badge:'Prompt Tip', title:'*Prompt* واحد يحلل أي Ad تاع منافس', size:'md', sub:'Copy / Paste وجربو اليوم',
-     items:['واش تجمع قبل','الـ Prompt كامل','واش تدير بالنتيجة']},
-    {type:'cards', counter:'1/4', tag:'BEFORE', title:'قبل الـ Prompt: *جمع*', items:[
-      {t:'الـ Text تاع الـ Ad', rows:[['v','من','Meta Ad Library']]},
-      {t:'الـ Creative', rows:[['v','كيفاش','Screenshot ولا وصف للفيديو']]},
-      {t:'الـ Offer', rows:[['v','شنو','السومة، التوصيل، الـ Landing Page']]},
+    {type:'hookshot', badge:'Prompt Tip', title:'*Prompt* واحد يحلل أي Ad تاع منافس', size:'md', sub:'Copy / Paste وجربو اليوم 👇', img:'img/ads.jpg', imgLabel:L.n8n, h:470},
+    {type:'shot', counter:'1/3', tag:'BEFORE', title:'قبل الـ Prompt: *جمع*', side:true, img:'img/form.jpg', imgLabel:L.form, h:640, rows:[
+      ['v','الـ Text','من Meta Ad Library'],
+      ['c','الـ Creative','Screenshot ولا وصف للفيديو'],
+      ['g','الـ Offer','السومة، التوصيل، الـ Landing Page'],
     ]},
-    {type:'prompt', counter:'2/4', tag:'PROMPT', title:'الـ Prompt *كامل*', file:'ad-analysis.txt', lines:[
+    {type:'prompt', counter:'2/3', tag:'PROMPT', title:'الـ Prompt *كامل*', file:'ad-analysis.txt', lines:[
       'راك خبير Performance Marketing.',
       'هذا Ad تاع منافس: [ad]',
       '',
@@ -210,16 +183,11 @@ module.exports = [
       'من بعد اقترح 5 Hooks جداد للمنتج تاعي: [product]',
       'ما تكوبيش الـ Ad.',
     ], note:['g','DM','اكتب PROMPT في الكومنتار ونبعثهولك']},
-    {type:'flow', counter:'3/4', tag:'THEN', title:'واش تدير *بالنتيجة*', nodes:[
-      {t:'حلل بزاف تاع Ads', d:'ماشي Ad واحد برك'},
-      {t:'لقى الـ Angles اللي يتعاودو', d:'هوما اللي السوق يستجاب ليهم', key:true},
-      {t:'اختار 2 ولا 3 Angles', d:'وابني Creatives تاعك'},
-      {t:'دير Test', d:'الأرقام هي اللي تقرر', key:true},
-    ]},
-    {type:'cards', counter:'4/4', tag:'PRO TIPS', title:'باش تكون النتيجة *أحسن*', compact:true, items:[
-      {t:'اعطيه الكونتكست', rows:[['v','مثال','السوق الجزائري، الدفع عند الاستلام']]},
-      {t:'اطلب Format واضح', rows:[['c','مثال','«جاوبني في جدول»']]},
-      {t:'راجع ديما', rows:[['a','القاعدة','الـ AI يقترح، وانت تقرر']]},
+    {type:'shot', counter:'3/3', tag:'PRO TIPS', title:'باش تكون النتيجة *أحسن*', img:'img/ads.jpg', imgLabel:L.n8n, h:380, rows:[
+      ['v','الكونتكست','السوق الجزائري، الدفع عند الاستلام'],
+      ['c','الـ Format','«جاوبني في جدول»'],
+      ['g','الـ Test','اختار 2 ولا 3 Angles وجربهم'],
+      ['a','القاعدة','الـ AI يقترح، وانت تقرر'],
     ]},
     {type:'cta', title:'تحب نخدمو *الـ Creative* معاك؟', items:['تحليل المنافسين بالـ AI','Hooks و Scripts للـ Ads','فيديوهات إشهارية بالـ AI']},
   ],
