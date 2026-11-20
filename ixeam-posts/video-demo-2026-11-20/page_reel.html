@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>IXEAM · Reel</title>
 <style>
-:root{--violet:#8b5cf6;--indigo:#6d7bf7;--cyan:#22d3ee;--pink:#f472b6;--green:#34d399;--amber:#fbbf24;--muted:#93a0c7;--text:#eef2ff;
+:root{--violet:#8b5cf6;--indigo:#6d7bf7;--cyan:#22d3ee;--pink:#f472b6;--green:#34d399;--amber:#fbbf24;--muted:#c3cdf0;--text:#eef2ff;
 --grad:linear-gradient(90deg,#8b5cf6,#6d7bf7,#22d3ee);--glass:rgba(17,24,64,.62)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1080px;height:1920px;overflow:hidden;background:#060a1f}
@@ -25,7 +25,7 @@ bdi.l{white-space:nowrap;unicode-bidi:isolate;direction:ltr;display:inline-block
 #prog i{flex:1;height:6px;border-radius:6px;background:rgba(147,160,199,.22);overflow:hidden;display:block}
 #prog b{display:block;height:100%;width:0;background:var(--grad)}
 #badge{position:absolute;top:238px;left:0;width:1080px;text-align:center;z-index:30}
-#badge span{display:inline-block;padding:6px 26px;border-radius:40px;border:2px solid rgba(139,92,246,.55);background:rgba(139,92,246,.16);font-weight:800;font-size:25px}
+#badge span{display:inline-block;padding:6px 26px;border-radius:40px;border:2px solid rgba(139,92,246,.55);background:rgba(139,92,246,.16);font-weight:800;font-size:30px}
 .scene{position:absolute;inset:0;display:none}
 .pp{position:absolute;opacity:0}
 .glass{background:var(--glass);border:2px solid rgba(139,92,246,.45);border-radius:26px}
@@ -43,7 +43,7 @@ bdi.l{white-space:nowrap;unicode-bidi:isolate;direction:ltr;display:inline-block
 .gb{border:3px solid transparent;background:linear-gradient(#0b1030,#0b1030) padding-box,var(--grad) border-box}
 .t{direction:rtl;text-align:center;font-weight:800;line-height:1.35}
 #cap{position:absolute;left:110px;width:860px;top:1385px;height:150px;display:flex;align-items:center;justify-content:center;z-index:40}
-#cap div{direction:rtl;text-align:center;font-weight:900;font-size:40px;line-height:1.3;padding:10px 26px;border-radius:26px;background:rgba(6,10,31,.74);border:2px solid rgba(139,92,246,.35);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+#cap div{direction:rtl;text-align:center;font-weight:900;font-size:46px;line-height:1.3;padding:10px 26px;border-radius:26px;background:rgba(6,10,31,.88);border:2px solid rgba(139,92,246,.35);text-shadow:0 2px 12px rgba(0,0,0,.6)}
 #s7 .big{position:absolute;left:0;width:1080px;text-align:center}
 .logo{font-weight:900;font-size:170px;letter-spacing:10px;line-height:1.1;direction:ltr;position:relative;display:inline-block}
 .shine{position:absolute;inset:0;font:inherit;letter-spacing:inherit;color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%);background-size:300% 100%;background-repeat:no-repeat;background-position:100% 0;-webkit-background-clip:text;background-clip:text;opacity:0}
@@ -63,65 +63,47 @@ svg{overflow:visible}
 
   <!-- S1 -->
   <section class="scene" id="s1">
-    <div class="pp t" data-s="0.2" data-d="0.7" data-dy="40" style="left:40px;top:318px;width:1000px;font-size:80px;font-weight:900;line-height:1.3">
+    <div class="pp t" data-s="0.2" data-d="0.7" data-dy="40" style="left:40px;top:318px;width:1000px;font-size:84px;font-weight:900;line-height:1.3">
       كيفاش تصنع <span class="grad">Ad فيديو</span><br>لمنتجك بالـ <span class="grad">AI</span> ؟
     </div>
-    <div class="pp t" data-s="1.1" data-d="0.6" style="left:40px;top:575px;width:1000px"><span class="chip c" style="font-size:30px;padding:10px 32px">مثال حقيقي : Ensemble Sport Femme</span></div>
-    <div class="pp t" data-s="1.6" data-d="0.6" style="left:40px;top:665px;width:1000px"><span class="chip g">3500 DA</span>&nbsp;&nbsp;<span class="chip v">Séchage rapide</span>&nbsp;&nbsp;<span class="chip p">Protection UV</span></div>
-    <div class="pp ph gb" id="s1img" data-s="0.5" data-d="0.8" data-dy="60" style="left:230px;top:750px;width:620px;height:590px"><img src="assets/p1.jpg"></div>
+    <div class="pp t" data-s="1.1" data-d="0.6" style="left:40px;top:590px;width:1000px"><span class="chip c" style="font-size:34px;padding:10px 34px">مثال حقيقي : Ensemble Sport Femme</span></div>
+    <div class="pp ph gb" id="s1img" data-s="0.5" data-d="0.8" data-dy="60" style="left:200px;top:700px;width:680px;height:640px"><img src="assets/p1.jpg" style="object-position:50% 18%"></div>
   </section>
 
   <!-- S2 -->
   <section class="scene" id="s2">
-    <div class="pp t" data-s="6.5" data-d="0.5" style="left:90px;top:310px;width:330px"><span class="chip v">الصورة الأصلية</span></div>
+    <div class="pp t" data-s="6.5" data-d="0.5" style="left:90px;top:310px;width:330px"><span class="chip v" style="font-size:30px">الصورة الأصلية</span></div>
     <div class="pp ph gb" data-s="6.6" data-d="0.6" style="left:90px;top:362px;width:330px;height:440px"><img src="assets/p2.jpg"></div>
-    <div class="pp node" data-s="8.4" data-d="0.5" style="left:540px;top:470px;width:400px;height:220px">
-      <div class="mono" style="font-weight:800;font-size:38px">Image Edit</div>
-      <div class="mono" style="font-size:25px;color:var(--cyan);margin-top:6px">Generation · AI</div></div>
-    <div class="pp t" data-s="9.0" data-d="0.5" style="left:90px;top:858px;width:900px"><div class="glass" style="padding:12px 22px;font-size:33px">١ · تنظيف الخلفية</div></div>
-    <div class="pp t" data-s="9.5" data-d="0.5" style="left:90px;top:942px;width:900px"><div class="glass" style="padding:12px 22px;font-size:33px">٢ · <bdi class="l">Lifestyle shots</bdi></div></div>
-    <div class="pp t" data-s="10.0" data-d="0.5" style="left:90px;top:1026px;width:900px"><div class="glass" style="padding:12px 22px;font-size:33px">٣ · Variantes ديال الألوان</div></div>
-    <div class="pp ph" data-s="11.4" data-d="0.4" style="left:90px;top:1130px;width:98px;height:134px"><img src="assets/p2.jpg"></div>
-    <div class="pp ph" data-s="11.55" data-d="0.4" style="left:200px;top:1130px;width:98px;height:134px"><img src="assets/p3.jpg"></div>
-    <div class="pp ph" data-s="11.7" data-d="0.4" style="left:310px;top:1130px;width:98px;height:134px"><img src="assets/p4.jpg"></div>
-    <div class="pp ph" data-s="11.85" data-d="0.4" style="left:420px;top:1130px;width:98px;height:134px"><img src="assets/p6.png"></div>
-    <div class="pp t" data-s="11.3" data-d="0.5" style="left:560px;top:1130px;width:430px"><span class="chip g" style="font-size:26px">الصور الحقيقية = المرجع</span></div>
-    <div class="pp t" data-s="13.2" data-d="0.6" style="left:560px;top:1196px;width:430px"><span class="chip a" style="font-size:23px;white-space:normal;border-radius:22px;line-height:1.3;display:inline-block">راجع : الـ AI ما يبدّلش القطعة</span></div>
+    <div class="pp node" data-s="8.4" data-d="0.5" style="left:540px;top:500px;width:400px;height:160px"><div class="mono" style="font-weight:800;font-size:48px">AI Edit</div></div>
+    <div class="pp t" data-s="9.0" data-d="0.5" style="left:90px;top:872px;width:900px"><div class="glass" style="padding:14px 22px;font-size:40px">خلفية نظيفة</div></div>
+    <div class="pp t" data-s="9.5" data-d="0.5" style="left:90px;top:972px;width:900px"><div class="glass" style="padding:14px 22px;font-size:40px">صور Lifestyle</div></div>
+    <div class="pp t" data-s="10.0" data-d="0.5" style="left:90px;top:1072px;width:900px"><div class="glass" style="padding:14px 22px;font-size:40px">ألوان مختلفة</div></div>
+    <div class="pp t" data-s="11.3" data-d="0.5" style="left:90px;top:1200px;width:900px"><span class="chip g" style="font-size:36px;padding:8px 30px">الصور الحقيقية = المرجع</span></div>
   </section>
 
   <!-- S3 -->
   <section class="scene" id="s3">
     <div id="dial" style="position:absolute;left:540px;top:700px;width:0;height:0"></div>
-    <div class="pp t" data-s="21.3" data-d="0.5" style="left:90px;top:1170px;width:430px"><div class="glass" style="padding:12px 10px;height:124px"><span class="chip c" style="font-size:26px">Turntable photos</span><div style="font-size:25px;margin-top:8px">صور من كل زاوية</div></div></div>
-    <div class="pp t" data-s="22.1" data-d="0.5" style="left:560px;top:1170px;width:430px"><div class="glass" style="padding:12px 10px;height:124px"><span class="chip v" style="font-size:26px">3D Model</span><div style="font-size:25px;margin-top:8px">Model ثلاثي الأبعاد</div></div></div>
-    <div class="pp t" data-s="23.0" data-d="0.5" style="left:90px;top:1312px;width:900px"><span class="chip a" style="font-size:25px">الـ AI يكمّل الزوايا الناقصة... وتراجعها</span></div>
+    <div class="pp t" data-s="21.3" data-d="0.5" style="left:90px;top:1215px;width:900px"><div class="glass" style="padding:16px 18px;font-size:36px">للـ 360° الحقيقي : <span class="chip c" style="font-size:32px">Turntable</span> أو <span class="chip v" style="font-size:32px">3D Model</span></div></div>
   </section>
 
   <!-- S4 -->
   <section class="scene" id="s4">
-    <div class="pp glass" data-s="26.5" data-d="0.6" style="left:80px;top:310px;width:920px;height:372px;padding:20px 28px;direction:rtl">
-      <div class="chip v" style="margin-bottom:12px">Brief</div>
-      <div style="font-size:28px;line-height:1.4;font-weight:700;display:flex;flex-direction:column;gap:10px;direction:ltr">
-        <div style="display:flex;gap:14px"><span class="mono" style="color:var(--muted);min-width:165px;font-size:22px;padding-top:3px">Produit</span><span>Ensemble Sport Femme</span></div>
-        <div style="display:flex;gap:14px"><span class="mono" style="color:var(--muted);min-width:165px;font-size:22px;padding-top:3px">Prix</span><span>3500 DA</span></div>
-        <div style="display:flex;gap:14px"><span class="mono" style="color:var(--muted);min-width:165px;font-size:22px;padding-top:3px">Bénéfices</span><span>Séchage rapide · Protection UV</span></div>
-        <div style="display:flex;gap:14px"><span class="mono" style="color:var(--muted);min-width:165px;font-size:22px;padding-top:3px">Audience</span><span dir="rtl">نساء رياضة ومشي <span class="chip a" style="font-size:18px;padding:0 12px">مثال</span></span></div>
-        <div style="display:flex;gap:14px"><span class="mono" style="color:var(--muted);min-width:165px;font-size:22px;padding-top:3px">Offre</span><span dir="rtl">Livraison <span class="chip a" style="font-size:18px;padding:0 12px">مثال</span></span></div>
-      </div>
+    <div class="pp glass" data-s="26.5" data-d="0.6" style="left:80px;top:310px;width:920px;height:160px;padding:14px 28px;direction:rtl;text-align:center">
+      <span class="chip v" style="font-size:32px">Brief</span>
+      <div style="font-size:38px;font-weight:800;margin-top:8px">Ensemble Sport Femme · 3500 DA</div>
     </div>
-    <div class="pp node" data-s="29.4" data-d="0.5" style="left:420px;top:752px;width:240px;height:92px"><div class="mono" style="font-weight:800;font-size:40px">LLM</div></div>
-    <div class="pp t" data-s="31.2" data-d="0.5" style="left:700px;top:772px;width:300px"><span class="chip a" style="font-size:22px">أمثلة للتوضيح</span></div>
+    <div class="pp node" data-s="29.4" data-d="0.5" style="left:400px;top:566px;width:280px;height:96px"><div class="mono" style="font-weight:800;font-size:46px">LLM</div></div>
+    <div class="pp t" data-s="31.2" data-d="0.5" style="left:710px;top:588px;width:290px"><span class="chip a" style="font-size:30px">مثال</span></div>
     <div id="beats"></div>
   </section>
 
   <!-- S5 -->
   <section class="scene" id="s5">
     <div id="cells"></div>
-    <div class="pp t" data-s="45.2" data-d="0.4" style="left:740px;top:1046px;width:260px"><span class="chip g mono" style="font-size:24px">Montage</span></div>
-    <div class="pp mono" data-s="41.6" data-d="0.4" style="left:80px;top:1108px;width:110px;font-size:22px;color:var(--muted);direction:ltr">Clips</div>
-    <div class="pp mono" data-s="42.6" data-d="0.4" style="left:80px;top:1168px;width:110px;font-size:22px;color:var(--muted);direction:ltr">Voice</div>
-    <div class="pp mono" data-s="43.6" data-d="0.4" style="left:80px;top:1228px;width:110px;font-size:22px;color:var(--muted);direction:ltr">Subs</div>
-    <div id="tracks"></div>
+    <div class="pp t" data-s="41.6" data-d="0.4" style="left:80px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Clips</div></div>
+    <div class="pp t" data-s="42.6" data-d="0.4" style="left:400px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Voice over</div></div>
+    <div class="pp t" data-s="43.6" data-d="0.4" style="left:720px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Subtitles</div></div>
   </section>
 
   <!-- S6 -->
@@ -132,12 +114,10 @@ svg{overflow:visible}
       <div id="adprice" style="position:absolute;left:0;right:0;bottom:100px;text-align:center"></div>
       <div id="adcta" style="position:absolute;left:0;right:0;bottom:28px;text-align:center"></div>
     </div>
-    <div class="pp t" data-s="49.6" data-d="0.5" style="left:80px;top:1128px;width:290px"><div class="glass" style="padding:10px 10px;font-size:25px"><span class="chip v" style="font-size:19px;padding:0 12px">A</span> الراحة</div></div>
-    <div class="pp t" data-s="50.1" data-d="0.5" style="left:395px;top:1128px;width:290px"><div class="glass" style="padding:10px 10px;font-size:25px"><span class="chip c" style="font-size:19px;padding:0 12px">B</span> Séchage rapide</div></div>
-    <div class="pp t" data-s="50.6" data-d="0.5" style="left:710px;top:1128px;width:290px"><div class="glass" style="padding:10px 10px;font-size:25px"><span class="chip p" style="font-size:19px;padding:0 12px">C</span> السعر</div></div>
-    <div class="pp t" data-s="51.4" data-d="0.5" style="left:80px;top:1218px;width:290px"><span class="chip g" style="font-size:28px">A/B Test</span></div>
-    <div class="pp t" data-s="51.8" data-d="0.5" style="left:395px;top:1218px;width:290px"><div class="glass" style="padding:8px 10px;font-size:24px">Retention · CTR</div></div>
-    <div class="pp t" data-s="52.3" data-d="0.5" style="left:710px;top:1218px;width:290px"><div class="glass" style="padding:8px 10px;font-size:24px">نختارو الأحسن</div></div>
+    <div class="pp t" data-s="49.6" data-d="0.5" style="left:80px;top:1130px;width:290px"><div class="glass" style="padding:12px 8px;font-size:36px"><span class="chip v" style="font-size:28px;padding:0 14px">A</span> راحة</div></div>
+    <div class="pp t" data-s="50.1" data-d="0.5" style="left:395px;top:1130px;width:290px"><div class="glass" style="padding:12px 8px;font-size:36px"><span class="chip c" style="font-size:28px;padding:0 14px">B</span> سرعة</div></div>
+    <div class="pp t" data-s="50.6" data-d="0.5" style="left:710px;top:1130px;width:290px"><div class="glass" style="padding:12px 8px;font-size:36px"><span class="chip p" style="font-size:28px;padding:0 14px">C</span> سعر</div></div>
+    <div class="pp t" data-s="51.6" data-d="0.5" style="left:80px;top:1240px;width:920px"><div class="glass" style="padding:12px 18px;font-size:36px"><span class="chip g" style="font-size:30px">A/B Test</span> نختارو الأحسن</div></div>
   </section>
 
   <!-- S7 -->
@@ -145,7 +125,7 @@ svg{overflow:visible}
     <div class="pp big" data-s="54.3" data-d="0.7" style="top:470px"><span class="logo grad">IXEAM<span class="shine" id="shine">IXEAM</span></span></div>
     <div class="pp big t" data-s="54.8" data-d="0.6" style="top:730px;font-size:62px;font-weight:900;left:0;width:1080px">واش حبيت <span class="grad">Ad</span> لمنتجك؟</div>
     <div class="pp big" data-s="55.3" data-d="0.6" style="top:900px"><span class="btn">ابعثلنا ميساج</span></div>
-    <div class="pp big" data-s="55.8" data-d="0.6" style="top:1070px"><span class="chip c" style="font-size:29px">تابعنا باش تتعلم أكثر</span></div>
+    <div class="pp big" data-s="55.8" data-d="0.6" style="top:1070px"><span class="chip c" style="font-size:34px">تابعنا باش تتعلم أكثر</span></div>
   </section>
 
   <div id="cap"><div id="capT" style="opacity:0"></div></div>
@@ -190,14 +170,15 @@ function mkArrow(sceneId,x1,y1,x2,y2,s,d,color){
   svg.appendChild(p);svg.appendChild(hp);$(sceneId).appendChild(svg);
   const len=Math.hypot(x2-x1,y2-y1);arrows.push({p,hp,len,s,d});p.style.strokeDasharray=len;
 }
+
 mkArrow('s2',436,580,528,580,7.6,0.5);
-mkArrow('s2',740,700,740,846,8.9,0.6);
-mkArrow('s4',540,688,540,744,28.9,0.4);
-mkArrow('s4',540,852,540,900,30.0,0.4);
+mkArrow('s2',740,668,740,862,8.9,0.6);
+mkArrow('s4',540,484,540,558,28.9,0.4);
+mkArrow('s4',540,670,540,718,30.0,0.4);
 
 /* S3 turntable (simulated rotation from front + back photos) */
 const dial=$('dial');
-const M={'w': 340, 'h': 490, 'py': 258, 'rx': 260, 'ry': 52, 'angDy': 16, 'angFs': 60};
+const M={'w': 340, 'h': 490, 'py': 258, 'rx': 260, 'ry': 52, 'angDy': 16, 'angFs': 70};
 const PW=1080,PH=1920,IRMAX=Math.hypot(PW/2,PH/2)*1.03,CX=PW/2,CY=PH/2,TR=0.85;
 (function(){
   const rx=M.rx,ry=M.ry,ax=rx+16,ay=ry+8;
@@ -222,24 +203,24 @@ const PW=1080,PH=1920,IRMAX=Math.hypot(PW/2,PH/2)*1.03,CX=PW/2,CY=PH/2,TR=0.85;
   ang.style.cssText='left:-200px;top:'+(M.py+ry+M.angDy)+'px;width:400px';
   ang.innerHTML='<span id="ang" class="mono grad" style="font-size:'+M.angFs+'px;font-weight:800">0°</span>';dial.appendChild(ang);
   const sim=document.createElement('div');sim.className='pp t';sim.dataset.s='17.6';sim.dataset.d='0.4';
-  sim.style.cssText='left:-330px;top:'+(M.py+ry+M.angDy+M.angFs+14)+'px;width:660px';
-  sim.innerHTML='<span class="chip a" style="font-size:24px">محاكاة من صورتين : قدام + ورا</span>';dial.appendChild(sim);
+  sim.style.cssText='left:-330px;top:'+(M.py+ry+M.angDy+Math.round(M.angFs*1.45)+14)+'px;width:660px';
+  sim.innerHTML='<span class="chip a" style="font-size:30px">محاكاة من صورتين : قدام + ورا</span>';dial.appendChild(sim);
 })();
 
 /* S4 beats */
-const beats=[['HOOK','لباس واحد يمشي معاك للرياضة وللخرجة','v'],['PROBLÈME','ما تلقاش لباس مريح ويناشف بسرعة؟','p'],['SOLUTION','Ensemble 2 قطع : Veste + Pantalon large','c'],['DÉMO','قماش خفيف · Séchage rapide · Protection UV','g'],['CTA','اطلب دوك · 3500 DA','a']];
+const beats=[['Hook','لباس واحد لكل الخرجات','v'],['مشكل','ما تلقاش لباس مريح وينشف بسرعة؟','p'],['حل','Ensemble 2 قطع','c'],['Démo','Séchage rapide · Protection UV','g'],['CTA','اطلب دوك · 3500 DA','a']];
 (function(){
   const host=$('beats');
   beats.forEach((b,i)=>{
     const d=document.createElement('div');d.className='pp glass';d.dataset.s=(31.6+i*0.95).toFixed(2);d.dataset.d='0.5';d.dataset.dx='80';
-    d.style.cssText='left:80px;top:'+(908+i*86)+'px;width:920px;height:74px;display:flex;align-items:center;gap:16px;padding:0 20px;direction:rtl';
-    d.innerHTML='<span class="chip '+b[2]+' mono" style="font-size:19px;min-width:150px;text-align:center;padding:4px 8px">'+b[0]+'</span><span style="font-size:27px;font-weight:700;flex:1;text-align:right">'+b[1]+'</span>';
+    d.style.cssText='left:80px;top:'+(726+i*118)+'px;width:920px;height:100px;display:flex;align-items:center;gap:16px;padding:0 20px;direction:rtl';
+    d.innerHTML='<span class="chip '+b[2]+'" style="font-size:30px;min-width:190px;text-align:center;padding:4px 8px">'+b[0]+'</span><span style="font-size:36px;font-weight:700;flex:1;text-align:right">'+b[1]+'</span>';
     host.appendChild(d);
   });
 })();
 
 /* S5 */
-const cellData=[['assets/p3.jpg','Scène 1 · Plan large'],['assets/p4.jpg','Scène 2 · Les poches'],['assets/p6.png','Scène 3 · Les couleurs'],['assets/p5.png','Scène 4 · Vue de dos']];
+const cellData=[['assets/p3.jpg','مشهد 1'],['assets/p4.jpg','مشهد 2'],['assets/p6.png','مشهد 3'],['assets/p5.png','مشهد 4']];
 const cellEls=[];
 (function(){
   const host=$('cells');
@@ -247,19 +228,10 @@ const cellEls=[];
     const col=i%2,row=Math.floor(i/2);
     const d=document.createElement('div');d.className='pp';d.dataset.s=(38.5+i*0.7).toFixed(2);d.dataset.d='0.5';
     d.style.cssText='left:'+(80+col*480)+'px;top:'+(320+row*370)+'px;width:440px;height:340px';
-    d.innerHTML='<div class="ph gb" style="position:absolute;left:0;top:0;width:440px;height:300px"><div class="kb" style="position:absolute;inset:0">'+img(c[0])+'</div><div class="play" style="position:absolute;right:12px;top:12px;opacity:0"><span class="chip g mono" style="font-size:18px;padding:2px 12px">▶ Clip</span></div></div><div class="t" style="position:absolute;left:0;right:0;top:304px;font-size:24px;color:var(--muted)">'+c[1]+'</div>';
+    d.innerHTML='<div class="ph gb" style="position:absolute;left:0;top:0;width:440px;height:300px"><div class="kb" style="position:absolute;inset:0">'+img(c[0])+'</div><div class="play" style="position:absolute;right:12px;top:12px;opacity:0"><span class="chip g" style="font-size:24px;padding:2px 14px">▶</span></div></div><div class="t" style="position:absolute;left:0;right:0;top:302px;font-size:34px;color:var(--text)">'+c[1]+'</div>';
     d.querySelector('img').style.objectPosition='50% 30%';
     host.appendChild(d);cellEls.push(d);
   });
-  const tr=$('tracks');
-  const cols=['#8b5cf6','#6d7bf7','#22d3ee','#f472b6'];
-  cols.forEach((c,i)=>{const d=document.createElement('div');d.className='pp';d.dataset.s=(41.7+i*0.2).toFixed(2);d.dataset.d='0.35';d.style.cssText='left:'+(200+i*203)+'px;top:1106px;width:191px;height:44px;border-radius:12px;background:'+c+'66;border:2px solid '+c;tr.appendChild(d);});
-  const wv=document.createElement('div');wv.className='pp';wv.dataset.s='42.7';wv.dataset.d='0.4';wv.style.cssText='left:200px;top:1166px;width:800px;height:44px;display:flex;align-items:center;gap:4px;direction:ltr';
-  let bars='';for(let i=0;i<70;i++){const h=8+Math.abs(Math.sin(i*.7)*Math.cos(i*.23))*34;bars+='<i style="flex:1;height:'+h.toFixed(1)+'px;background:#22d3ee;border-radius:3px;display:block;opacity:.85"></i>';}
-  wv.innerHTML=bars;tr.appendChild(wv);
-  const sb=document.createElement('div');sb.className='pp';sb.dataset.s='43.7';sb.dataset.d='0.4';sb.style.cssText='left:200px;top:1226px;width:800px;height:44px;display:flex;gap:12px;direction:ltr';
-  for(let i=0;i<5;i++){sb.innerHTML+='<i style="flex:1;border-radius:22px;background:rgba(244,114,182,.25);border:2px solid #f472b6;display:block"></i>';}
-  tr.appendChild(sb);
 })();
 
 /* S6 ad */
