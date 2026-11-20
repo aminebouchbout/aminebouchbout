@@ -50,6 +50,8 @@ bdi.l{white-space:nowrap;unicode-bidi:isolate;direction:ltr;display:inline-block
 .btn{display:inline-block;padding:18px 70px;border-radius:70px;background:var(--grad);color:#fff;font-weight:900;font-size:46px;box-shadow:0 0 70px rgba(109,123,247,.55)}
 #streak{position:absolute;top:0;height:1920px;width:300px;z-index:25;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(34,211,238,.0) 20%,rgba(160,200,255,.55) 50%,rgba(139,92,246,.0) 80%,transparent);filter:blur(6px)}
 #flash{position:absolute;inset:0;z-index:24;pointer-events:none;opacity:0;background:radial-gradient(circle at center,rgba(139,92,246,.35),transparent 70%)}
+.stk{background:linear-gradient(90deg,#fbbf24,#f472b6);color:#0b1030;font-weight:900;border-radius:22px;padding:8px 18px;box-shadow:0 8px 30px rgba(244,114,182,.38);line-height:1.25;z-index:5}
+.cf{position:absolute;left:0;top:0;opacity:0;border-radius:3px}
 svg{overflow:visible}
 </style>
 </head>
@@ -68,6 +70,7 @@ svg{overflow:visible}
     </div>
     <div class="pp t" data-s="1.1" data-d="0.6" style="left:40px;top:590px;width:1000px"><span class="chip c" style="font-size:34px;padding:10px 34px">مثال حقيقي : Ensemble Sport Femme</span></div>
     <div class="pp ph gb" id="s1img" data-s="0.5" data-d="0.8" data-dy="60" style="left:200px;top:700px;width:680px;height:640px"><img src="assets/p1.jpg" style="object-position:50% 18%"></div>
+    <div class="pp stk t" data-s="1.8" data-d="0.5" data-rot="-6" data-wig="1" style="left:110px;top:1240px;width:440px;font-size:36px">ما عندكش Studio؟ عادي! 😅</div>
   </section>
 
   <!-- S2 -->
@@ -79,12 +82,14 @@ svg{overflow:visible}
     <div class="pp t" data-s="9.5" data-d="0.5" style="left:90px;top:972px;width:900px"><div class="glass" style="padding:14px 22px;font-size:40px">صور Lifestyle</div></div>
     <div class="pp t" data-s="10.0" data-d="0.5" style="left:90px;top:1072px;width:900px"><div class="glass" style="padding:14px 22px;font-size:40px">ألوان مختلفة</div></div>
     <div class="pp t" data-s="11.3" data-d="0.5" style="left:90px;top:1200px;width:900px"><span class="chip g" style="font-size:36px;padding:8px 30px">الصور الحقيقية = المرجع</span></div>
+    <div class="pp stk t" data-s="7.2" data-d="0.5" data-rot="3" data-wig="1" style="left:440px;top:340px;width:560px;font-size:30px">مهمتك : صوّر منتجك بالتيليفون 📱</div>
   </section>
 
   <!-- S3 -->
   <section class="scene" id="s3">
     <div id="dial" style="position:absolute;left:540px;top:700px;width:0;height:0"></div>
     <div class="pp t" data-s="21.3" data-d="0.5" style="left:90px;top:1215px;width:900px"><div class="glass" style="padding:16px 18px;font-size:36px">للـ 360° الحقيقي : <span class="chip c" style="font-size:32px">Turntable</span> أو <span class="chip v" style="font-size:32px">3D Model</span></div></div>
+    <div class="pp stk t" data-s="17.4" data-d="0.5" data-rot="5" data-wig="1" style="left:740px;top:470px;width:280px;font-size:32px">مهمتك : دور حوله وصوّر كل زاوية 🔄</div>
   </section>
 
   <!-- S4 -->
@@ -96,6 +101,7 @@ svg{overflow:visible}
     <div class="pp node" data-s="29.4" data-d="0.5" style="left:400px;top:566px;width:280px;height:96px"><div class="mono" style="font-weight:800;font-size:46px">LLM</div></div>
     <div class="pp t" data-s="31.2" data-d="0.5" style="left:710px;top:588px;width:290px"><span class="chip a" style="font-size:30px">مثال</span></div>
     <div id="beats"></div>
+    <div class="pp stk t" data-s="27.0" data-d="0.5" data-rot="-4" data-wig="1" style="left:50px;top:572px;width:340px;font-size:32px">مهمتك : اكتب الـ Brief 📝</div>
   </section>
 
   <!-- S5 -->
@@ -104,6 +110,7 @@ svg{overflow:visible}
     <div class="pp t" data-s="41.6" data-d="0.4" style="left:80px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Clips</div></div>
     <div class="pp t" data-s="42.6" data-d="0.4" style="left:400px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Voice over</div></div>
     <div class="pp t" data-s="43.6" data-d="0.4" style="left:720px;top:1090px;width:280px"><div class="glass" style="padding:16px 8px;font-size:38px">Subtitles</div></div>
+    <div class="pp stk t" data-s="39.0" data-d="0.5" data-rot="-2" data-wig="1" style="left:80px;top:1215px;width:920px;font-size:36px">مهمتك : قسّم لـ 4 مشاهد 🎬</div>
   </section>
 
   <!-- S6 -->
@@ -118,6 +125,7 @@ svg{overflow:visible}
     <div class="pp t" data-s="50.1" data-d="0.5" style="left:395px;top:1130px;width:290px"><div class="glass" style="padding:12px 8px;font-size:36px"><span class="chip c" style="font-size:28px;padding:0 14px">B</span> سرعة</div></div>
     <div class="pp t" data-s="50.6" data-d="0.5" style="left:710px;top:1130px;width:290px"><div class="glass" style="padding:12px 8px;font-size:36px"><span class="chip p" style="font-size:28px;padding:0 14px">C</span> سعر</div></div>
     <div class="pp t" data-s="51.6" data-d="0.5" style="left:80px;top:1240px;width:920px"><div class="glass" style="padding:12px 18px;font-size:36px"><span class="chip g" style="font-size:30px">A/B Test</span> نختارو الأحسن</div></div>
+    <div class="pp stk t" data-s="48.9" data-d="0.5" data-rot="6" data-wig="1" style="left:790px;top:480px;width:240px;font-size:32px">مهمتك : صنع 3 نسخ 🧪</div>
   </section>
 
   <!-- S7 -->
@@ -126,8 +134,10 @@ svg{overflow:visible}
     <div class="pp big t" data-s="54.8" data-d="0.6" style="top:730px;font-size:62px;font-weight:900;left:0;width:1080px">واش حبيت <span class="grad">Ad</span> لمنتجك؟</div>
     <div class="pp big" data-s="55.3" data-d="0.6" style="top:900px"><span class="btn">ابعثلنا ميساج</span></div>
     <div class="pp big" data-s="55.8" data-d="0.6" style="top:1070px"><span class="chip c" style="font-size:34px">تابعنا باش تتعلم أكثر</span></div>
+    <div class="pp stk t" data-s="56.0" data-d="0.5" data-rot="-3" data-wig="1" style="left:140px;top:1190px;width:800px;font-size:40px">جرّب بنفسك! 💪</div>
   </section>
 
+  <div id="confetti" style="position:absolute;inset:0;z-index:27;pointer-events:none"></div>
   <div id="cap"><div id="capT" style="opacity:0"></div></div>
 </div>
 <script src="timeline.js"></script>
@@ -257,7 +267,28 @@ let lastCap=-1;
 const ringEl=$('ring'),ringC1=$('rc1'),ringC2=$('rc2');
 const cuts=TL.scenes.slice(1).map(s=>s.start);
 
+/* confetti */
+const CF=[];
+(function(){
+  let a=12345;const rnd=()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};
+  const cols=['#8b5cf6','#6d7bf7','#22d3ee','#f472b6','#fbbf24','#34d399'];
+  [52.9,54.4].forEach(bt=>{for(let i=0;i<60;i++){
+    const d=document.createElement('div');d.className='cf';const w=8+rnd()*12,h=5+rnd()*9;
+    d.style.width=w+'px';d.style.height=h+'px';d.style.background=cols[Math.floor(rnd()*cols.length)];
+    $('confetti').appendChild(d);
+    CF.push({d,bt,x0:540+(rnd()-.5)*200,y0:1000,vx:(rnd()-.5)*(PW*.75),vy:-(PH*.25+rnd()*PH*.45),r0:rnd()*360,vr:(rnd()-.5)*900});
+  }});
+})();
+function confettiUpdate(t){
+  CF.forEach(p=>{const tau=t-p.bt;
+    if(tau<0||tau>2.6){p.d.style.opacity=0;return;}
+    const x=p.x0+p.vx*tau,y=p.y0+p.vy*tau+0.5*1500*tau*tau;
+    p.d.style.opacity=tau<2.0?1:Math.max(0,(2.6-tau)/0.6);
+    p.d.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+(p.r0+p.vr*tau).toFixed(0)+'deg)';});
+}
+
 window.render=function(t){
+  confettiUpdate(t);
   let cur=-1;
   scenes.forEach((s,i)=>{
     const last=i===scenes.length-1;
@@ -285,7 +316,8 @@ window.render=function(t){
     const pr=clamp((t-s)/d),p=ease(pr),b=back(pr);
     const dy=el.dataset.dy!==undefined?parseFloat(el.dataset.dy):(el.dataset.dx!==undefined?0:28),dx=parseFloat(el.dataset.dx||0);
     el.style.opacity=Math.min(1,p*1.4);
-    el.style.transform='translate('+((1-p)*dx)+'px,'+((1-p)*dy)+'px) scale('+(.86+.14*b)+')';
+    const rot=parseFloat(el.dataset.rot||0)+(el.dataset.wig?Math.sin(t*3+s)*1.6*p:0);
+    el.style.transform='translate('+((1-p)*dx)+'px,'+((1-p)*dy)+'px) scale('+(.86+.14*b)+')'+' rotate('+rot.toFixed(2)+'deg)';
   });
   arrows.forEach(a=>{const p=ease(clamp((t-a.s)/a.d));a.p.style.strokeDashoffset=a.len*(1-p);a.p.style.opacity=p>0?1:0;a.hp.style.opacity=clamp((p-.85)/.15);});
   progB.forEach((b,i)=>{const s=TL.scenes[i];b.style.width=(clamp((t-s.start)/(s.end-s.start))*100)+'%';});
