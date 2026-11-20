@@ -1,0 +1,202 @@
+{
+  "name": "New order → Confirmation sheet",
+  "nodes": [
+    {
+      "id": "n0106-0000-4000-8000-000000000000",
+      "name": "New Shopify order",
+      "type": "n8n-nodes-base.shopifyTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "authentication": "accessToken",
+        "topic": "orders/create"
+      },
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "",
+          "name": "Shopify — my store"
+        }
+      },
+      "webhookId": "f3c1a2b4-1111-4222-8333-944455556666"
+    },
+    {
+      "id": "n0107-0000-4000-8000-000000000000",
+      "name": "Keep useful fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "order",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "a2",
+              "name": "customer",
+              "value": "={{ $json.shipping_address.name }}",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "phone",
+              "value": "={{ $json.shipping_address.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "a4",
+              "name": "wilaya",
+              "value": "={{ $json.shipping_address.province }}",
+              "type": "string"
+            },
+            {
+              "id": "a5",
+              "name": "total",
+              "value": "={{ $json.total_price }}",
+              "type": "string"
+            },
+            {
+              "id": "a6",
+              "name": "status",
+              "value": "جديدة",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n0108-0000-4000-8000-000000000000",
+      "name": "Add row to Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Commandes"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "id": "n0109-0000-4000-8000-000000000000",
+      "name": "Notify the team",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        780,
+        0
+      ],
+      "parameters": {
+        "chatId": "-100123456789",
+        "text": "=🛒 طلبية جديدة {{ $json.order }} — {{ $json.wilaya }}",
+        "additionalFields": {}
+      },
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "New Shopify order": {
+      "main": [
+        [
+          {
+            "node": "Keep useful fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep useful fields": {
+      "main": [
+        [
+          {
+            "node": "Add row to Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add row to Sheet": {
+      "main": [
+        [
+          {
+            "node": "Notify the team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "New Shopify order": [
+      {
+        "json": {
+          "name": "#1024",
+          "total_price": "6500.00",
+          "shipping_address": {
+            "name": "مثال — Client",
+            "phone": "05 XX XX XX XX",
+            "province": "Oran"
+          }
+        }
+      }
+    ],
+    "Add row to Sheet": [
+      {
+        "json": {
+          "order": "#1024",
+          "status": "جديدة"
+        }
+      }
+    ],
+    "Notify the team": [
+      {
+        "json": {
+          "ok": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

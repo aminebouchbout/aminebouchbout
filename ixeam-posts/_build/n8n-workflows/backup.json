@@ -1,0 +1,194 @@
+{
+  "name": "Nightly store backup → Google Drive",
+  "nodes": [
+    {
+      "id": "n0110-0000-4000-8000-000000000000",
+      "name": "Every night 02:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        100
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "n0111-0000-4000-8000-000000000000",
+      "name": "Get all products",
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "getAll",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "",
+          "name": "Shopify — my store"
+        }
+      }
+    },
+    {
+      "id": "n0112-0000-4000-8000-000000000000",
+      "name": "Get all orders",
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        260,
+        200
+      ],
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "",
+          "name": "Shopify — my store"
+        }
+      }
+    },
+    {
+      "id": "n0113-0000-4000-8000-000000000000",
+      "name": "Products → CSV",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "options": {
+          "fileName": "={{ 'products-' + $now.toFormat('yyyy-MM-dd') + '.csv' }}"
+        }
+      }
+    },
+    {
+      "id": "n0114-0000-4000-8000-000000000000",
+      "name": "Orders → CSV",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        200
+      ],
+      "parameters": {
+        "options": {
+          "fileName": "={{ 'orders-' + $now.toFormat('yyyy-MM-dd') + '.csv' }}"
+        }
+      }
+    },
+    {
+      "id": "n0115-0000-4000-8000-000000000000",
+      "name": "Upload to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        780,
+        100
+      ],
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "BACKUP_FOLDER_ID"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every night 02:00": {
+      "main": [
+        [
+          {
+            "node": "Get all products",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get all orders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all products": {
+      "main": [
+        [
+          {
+            "node": "Products → CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all orders": {
+      "main": [
+        [
+          {
+            "node": "Orders → CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Products → CSV": {
+      "main": [
+        [
+          {
+            "node": "Upload to Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orders → CSV": {
+      "main": [
+        [
+          {
+            "node": "Upload to Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
