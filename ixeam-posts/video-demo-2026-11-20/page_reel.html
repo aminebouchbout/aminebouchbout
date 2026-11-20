@@ -59,7 +59,7 @@ svg{overflow:visible}
   <div id="hdr"><div class="w grad">IXEAM</div><div class="s">AI LABS</div></div>
   <div id="prog"></div>
   <div id="badge"><span id="badgeT"></span></div>
-  <div id="flash"></div><div id="streak"></div>
+  <svg id="ring" style="position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:26;pointer-events:none;opacity:0;filter:drop-shadow(0 0 16px rgba(109,123,247,.95))"><defs><linearGradient id="rg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1080" y2="0"><stop offset="0" stop-color="#8b5cf6"/><stop offset=".5" stop-color="#6d7bf7"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><circle id="rc1" cx="540" cy="960" r="0" fill="none" stroke="url(#rg)" stroke-width="10"/><circle id="rc2" cx="540" cy="960" r="0" fill="none" stroke="rgba(160,200,255,.45)" stroke-width="3"/></svg>
 
   <!-- S1 -->
   <section class="scene" id="s1">
@@ -91,7 +91,7 @@ svg{overflow:visible}
 
   <!-- S3 -->
   <section class="scene" id="s3">
-    <div id="dial" style="position:absolute;left:540px;top:740px;width:0;height:0"></div>
+    <div id="dial" style="position:absolute;left:540px;top:700px;width:0;height:0"></div>
     <div class="pp t" data-s="21.3" data-d="0.5" style="left:90px;top:1170px;width:430px"><div class="glass" style="padding:12px 10px;height:124px"><span class="chip c" style="font-size:26px">Turntable photos</span><div style="font-size:25px;margin-top:8px">صور من كل زاوية</div></div></div>
     <div class="pp t" data-s="22.1" data-d="0.5" style="left:560px;top:1170px;width:430px"><div class="glass" style="padding:12px 10px;height:124px"><span class="chip v" style="font-size:26px">3D Model</span><div style="font-size:25px;margin-top:8px">Model ثلاثي الأبعاد</div></div></div>
     <div class="pp t" data-s="23.0" data-d="0.5" style="left:90px;top:1312px;width:900px"><span class="chip a" style="font-size:25px">الـ AI يكمّل الزوايا الناقصة... وتراجعها</span></div>
@@ -195,24 +195,35 @@ mkArrow('s2',740,700,740,846,8.9,0.6);
 mkArrow('s4',540,688,540,744,28.9,0.4);
 mkArrow('s4',540,852,540,900,30.0,0.4);
 
-/* S3 dial */
-const dial=$('dial');const R=270;
+/* S3 turntable (simulated rotation from front + back photos) */
+const dial=$('dial');
+const M={'w': 340, 'h': 490, 'py': 258, 'rx': 260, 'ry': 52, 'angDy': 16, 'angFs': 60};
+const PW=1080,PH=1920,IRMAX=Math.hypot(PW/2,PH/2)*1.03,CX=PW/2,CY=PH/2,TR=0.85;
 (function(){
-  let h='<svg style="position:absolute;left:-400px;top:-400px;width:800px;height:800px" viewBox="-400 -400 800 800">';
-  h+='<circle r="'+R+'" fill="none" stroke="rgba(139,92,246,.45)" stroke-width="3"/>';
-  for(let a=0;a<360;a+=30){const r=a*Math.PI/180,x1=Math.sin(r)*(R-14),y1=-Math.cos(r)*(R-14),x2=Math.sin(r)*(R+14),y2=-Math.cos(r)*(R+14);
-    h+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#93a0c7" stroke-width="'+(a%90?2:4)+'"/>';}
-  h+='<line id="sweep" x1="0" y1="0" x2="0" y2="-'+R+'" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>';
-  h+='<circle id="sweepdot" r="12" fill="#22d3ee"/></svg>';
-  dial.innerHTML=h;
-  const lab=(a,txt)=>{const r=a*Math.PI/180;const d=document.createElement('div');d.className='mono pp';d.dataset.s='16.4';d.dataset.d='0.4';d.style.cssText='left:'+(Math.sin(r)*(R-56)-34)+'px;top:'+(-Math.cos(r)*(R-56)-16)+'px;width:68px;text-align:center;font-size:24px;color:#93a0c7;font-weight:700';d.textContent=txt;dial.appendChild(d);};
-  lab(0,'0°');lab(90,'90°');lab(180,'180°');lab(270,'270°');
-  const mk=(a,src,s)=>{const r=a*Math.PI/180;const d=document.createElement('div');d.className='pp ph gb';d.dataset.s=s;d.dataset.d='0.5';d.style.cssText='left:'+(Math.sin(r)*R-46)+'px;top:'+(-Math.cos(r)*R-46)+'px;width:92px;height:92px;border-radius:50%;z-index:3';d.innerHTML=img(src);dial.appendChild(d);};
-  mk(0,'assets/p6.png','17.0');mk(180,'assets/p5.png','17.6');
-  const c=document.createElement('div');c.className='pp';c.dataset.s='16.6';c.dataset.d='0.6';c.style.cssText='left:-105px;top:-150px;width:210px;height:300px';
-  c.innerHTML='<div class="ph gb" style="position:absolute;inset:0"><img id="c1" src="assets/p6.png" style="opacity:1"><img id="c2" src="assets/p5.png" style="position:absolute;inset:0;opacity:0"></div><div id="cmiss" style="position:absolute;inset:0;border-radius:20px;border:3px dashed #fbbf24;background:rgba(6,10,31,.86);display:flex;align-items:center;justify-content:center;opacity:0;text-align:center;font-weight:800;font-size:28px;color:#fcd34d;direction:rtl;line-height:1.3">زاوية<br>ناقصة</div>';
-  dial.appendChild(c);
-  const st=document.createElement('div');st.id='dst';st.className='pp t';st.dataset.s='18.4';st.dataset.d='0.4';st.style.cssText='left:-400px;top:345px;width:800px';st.innerHTML='<span class="chip g" id="dstc" style="font-size:31px">0° · صورة موجودة</span>';dial.appendChild(st);
+  const rx=M.rx,ry=M.ry,ax=rx+16,ay=ry+8;
+  const plat=document.createElement('div');plat.className='pp';plat.dataset.s='16.5';plat.dataset.d='0.6';plat.dataset.dy='20';
+  plat.style.cssText='left:'+(-rx-60)+'px;top:'+(M.py-ry-60)+'px;width:'+(2*rx+120)+'px;height:'+(2*ry+120)+'px';
+  plat.innerHTML='<svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="'+(-rx-60)+' '+(-ry-60)+' '+(2*rx+120)+' '+(2*ry+120)+'">'
+   +'<defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset=".5" stop-color="#6d7bf7"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>'
+   +'<radialGradient id="tg2"><stop offset="0" stop-color="rgba(109,123,247,.5)"/><stop offset="1" stop-color="rgba(109,123,247,0)"/></radialGradient></defs>'
+   +'<ellipse rx="'+(rx+46)+'" ry="'+(ry+30)+'" fill="url(#tg2)"/>'
+   +'<ellipse rx="'+rx+'" ry="'+ry+'" fill="rgba(17,24,64,.85)" stroke="rgba(139,92,246,.6)" stroke-width="3"/>'
+   +'<ellipse rx="'+(rx*.62)+'" ry="'+(ry*.62)+'" fill="none" stroke="rgba(147,160,199,.25)" stroke-width="2"/>'
+   +'<path id="arc" d="M0 '+ay+' A'+ax+' '+ay+' 0 1 1 0 '+(-ay)+' A'+ax+' '+ay+' 0 1 1 0 '+ay+'" fill="none" stroke="url(#tg)" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>'
+   +'<circle id="adot" r="11" cx="0" cy="'+ay+'" fill="#22d3ee"/></svg>';
+  dial.appendChild(plat);
+  const wrap=document.createElement('div');wrap.className='pp';wrap.dataset.s='16.6';wrap.dataset.d='0.6';wrap.dataset.dy='30';
+  wrap.style.cssText='left:'+(-M.w/2)+'px;top:'+(-M.h/2)+'px;width:'+M.w+'px;height:'+M.h+'px;perspective:1300px';
+  wrap.innerHTML='<div id="mdl" style="position:absolute;inset:0;transform-style:preserve-3d">'
+   +'<div id="ff" class="ph gb" style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden"><img src="assets/p6.png"></div>'
+   +'<div id="fb" class="ph gb" style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg)"><img src="assets/p5.png"></div></div>';
+  dial.appendChild(wrap);
+  const ang=document.createElement('div');ang.className='pp t';ang.dataset.s='17.2';ang.dataset.d='0.4';
+  ang.style.cssText='left:-200px;top:'+(M.py+ry+M.angDy)+'px;width:400px';
+  ang.innerHTML='<span id="ang" class="mono grad" style="font-size:'+M.angFs+'px;font-weight:800">0°</span>';dial.appendChild(ang);
+  const sim=document.createElement('div');sim.className='pp t';sim.dataset.s='17.6';sim.dataset.d='0.4';
+  sim.style.cssText='left:-330px;top:'+(M.py+ry+M.angDy+M.angFs+14)+'px;width:660px';
+  sim.innerHTML='<span class="chip a" style="font-size:24px">محاكاة من صورتين : قدام + ورا</span>';dial.appendChild(sim);
 })();
 
 /* S4 beats */
@@ -271,28 +282,31 @@ const scenes=TL.scenes.map(s=>({...s,el:$(s.id)}));
 const pps=[...document.querySelectorAll('.pp')];
 const capT=$('capT');
 let lastCap=-1;
-const streak=$('streak'),flash=$('flash');
+const ringEl=$('ring'),ringC1=$('rc1'),ringC2=$('rc2');
 const cuts=TL.scenes.slice(1).map(s=>s.start);
 
 window.render=function(t){
   let cur=-1;
   scenes.forEach((s,i)=>{
-    if(t>=s.start&&t<s.end){cur=i;
-      const pin=ease(clamp((t-s.start)/0.55)),pout=ease(clamp((t-(s.end-0.32))/0.32));
-      const fin=ease(clamp((t-s.start)/0.35)),fout=1-pout;
-      const isLast=i===scenes.length-1,isFirst=i===0;
-      s.el.style.display='block';
-      s.el.style.opacity=isLast?fin:(isFirst?fout:Math.min(fin,fout));
-      const x=(isFirst?0:(1-pin)*150)-(isLast?0:pout*150);
-      const sc=1-(isLast?0:pout*0.04);
-      s.el.style.transform='translateX('+x+'px) scale('+sc+')';
-    } else s.el.style.display='none';
+    const last=i===scenes.length-1;
+    const vis=t>=s.start&&(last?t<s.end:t<s.end+TR);
+    if(!vis){s.el.style.display='none';return;}
+    if(t<s.end)cur=i;
+    s.el.style.display='block';s.el.style.zIndex=i+1;
+    let clip='none',mask='none',tf='none',fl='none',op=1;
+    if(i===0)op=ease(clamp((t-s.start)/0.35));
+    if(i>=1&&t<s.start+TR){const R=IRMAX*easeIO(clamp((t-s.start)/TR));clip='circle('+R.toFixed(1)+'px at '+CX+'px '+CY+'px)';}
+    if(!last&&t>=s.end){const p=clamp((t-s.end)/TR),R=IRMAX*easeIO(p);
+      mask='radial-gradient(circle at '+CX+'px '+CY+'px, transparent '+R.toFixed(1)+'px, #000 '+(R+3).toFixed(1)+'px)';
+      tf='scale('+(1+0.06*ease(p)).toFixed(4)+')';fl='blur('+(5*ease(p)).toFixed(2)+'px)';}
+    s.el.style.opacity=op;s.el.style.clipPath=clip;s.el.style.transform=tf;s.el.style.filter=fl;
+    s.el.style.webkitMaskImage=mask;s.el.style.maskImage=mask;
   });
-  /* streak + flash on cuts */
-  let sv=0,fv=0,sx=-400;
-  cuts.forEach(c=>{const p=(t-(c-0.28))/0.56;if(p>0&&p<1){sx=-300+easeIO(p)*1680;sv=Math.sin(Math.PI*p);}
-    const q=(t-(c-0.05))/0.4;if(q>0&&q<1)fv=Math.max(fv,Math.sin(Math.PI*q)*0.9);});
-  streak.style.left=sx+'px';streak.style.opacity=sv;flash.style.opacity=fv;
+  /* iris ring on each cut */
+  let rr=0,rv=0;
+  cuts.forEach(c=>{const p=(t-c)/TR;if(p>0&&p<1){rr=IRMAX*easeIO(p);rv=Math.min(1,Math.sin(Math.PI*p)*1.7);}});
+  ringC1.setAttribute('r',rr.toFixed(1));ringC2.setAttribute('r',Math.max(0,rr-60).toFixed(1));
+  ringEl.style.opacity=rv;
   /* pop-ins with overshoot */
   pps.forEach(el=>{
     const s=parseFloat(el.dataset.s),d=parseFloat(el.dataset.d||0.5);
@@ -308,21 +322,14 @@ window.render=function(t){
   $('prog').style.opacity=cur===6?0:1;
   ptc.forEach((d,i)=>{const x=(i*173+Math.sin(t*.3+i)*40)%1080,y=1920-((t*(14+i%5*4)+i*131)%1960);d.style.left=x+'px';d.style.top=y+'px';d.style.opacity=.1+.25*Math.abs(Math.sin(t*.8+i));});
   $('s1img').style.marginTop=(Math.sin(t*1.6)*8)+'px';
-  if(t>=16&&t<26){
-    const sp=easeIO(clamp((t-18.6)/5.4));const ang=sp*360,r=ang*Math.PI/180;
-    const sw=$('sweep'),sd=$('sweepdot');
-    sw.setAttribute('x2',Math.sin(r)*R);sw.setAttribute('y2',-Math.cos(r)*R);
-    sd.setAttribute('cx',Math.sin(r)*R);sd.setAttribute('cy',-Math.cos(r)*R);
-    sw.style.opacity=t>=18.4?1:0;sd.style.opacity=t>=18.4?1:0;
-    const n=((ang%360)+360)%360;
-    const near0=Math.min(n,360-n)<=22,near180=Math.abs(n-180)<=22;
-    $('c1').style.opacity=near0?1:0;$('c2').style.opacity=near180?1:0;
-    $('cmiss').style.opacity=(!near0&&!near180&&t>=18.6)?1:0;
-    const chip=$('dstc');
-    if(t<18.6){chip.className='chip g';chip.textContent='0° · صورة موجودة';}
-    else if(near0){chip.className='chip g';chip.innerHTML='<bdi class="l">'+Math.round(n<180?n:n-360)+'°</bdi> · صورة موجودة';}
-    else if(near180){chip.className='chip g';chip.innerHTML='<bdi class="l">'+Math.round(n)+'°</bdi> · صورة موجودة';}
-    else {chip.className='chip a';chip.innerHTML='<bdi class="l">'+Math.round(n)+'°</bdi> · ما عندناش صورة';}
+  if(t>=16&&t<27){
+    const u=clamp((t-18.0)/5.0),sm=u*u*(3-2*u),th=360*sm,r=th*Math.PI/180,c=Math.cos(r);
+    $('mdl').style.transform='rotateY('+th.toFixed(2)+'deg)';
+    const br='brightness('+(.55+.45*Math.abs(c)).toFixed(3)+')';
+    $('ff').style.filter=br;$('fb').style.filter=br;
+    $('arc').style.strokeDashoffset=(1-th/360).toFixed(4);
+    $('adot').setAttribute('cx',(-(M.rx+16)*Math.sin(r)).toFixed(1));$('adot').setAttribute('cy',((M.ry+8)*Math.cos(r)).toFixed(1));
+    $('ang').textContent=Math.round(th)+'°';
   }
   cellEls.forEach((c,i)=>{
     const k=ease(clamp((t-(40.6+i*0.4))/5)),kb=c.querySelector('.kb');

@@ -1,7 +1,6 @@
-Sound effects: "Adbertiser SFX" pack, https://github.com/Reodelbasalan/adbertiser-sfx
+Sound effects (minimal): "Adbertiser SFX" pack, https://github.com/Reodelbasalan/adbertiser-sfx
 License: CC0 1.0 (public domain, no credit required). Sounds are synthesized, not sampled.
-Used: impact_1, impact_2, whoosh_soft_1/2, whoosh_air_1/2, swipe_1/2, zoom_in_2, riser_short_1,
-tap_1/2, blip_1, ui_confirm, ding_success, level_up_1, scanner, swish_whip_1/2/3, sparkle_1,
-pop_2, pop_4, pop_high, pop_soft_1/2, pop_bubble_1.
-Each effect is aligned on its peak to the visual cut (see timeline.json for cut times).
-Music bed: synthesized pad + soft pulse (generated for this video).
+Used: whoosh_soft_1/2/3 (one soft pass at each of the 6 transitions), sparkle_1 (end card).
+
+Music: original, generated for this video with numpy (soft pluck arpeggio over Am-F-C-G at 92 BPM,
+bass, pad and a sparse bell melody). No third-party material.
